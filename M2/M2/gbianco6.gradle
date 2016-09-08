@@ -1,0 +1,18 @@
+apply plugin: 'java'
+defaultTasks 'jar'
+
+jar {
+	manifest {
+		attributes (
+            'Implementation-Title': "M2-gradle-jar",
+            'Implementation-Version': "1.0.0",
+            'Built-By': System.getProperty('user.name'),
+            'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain',
+            'Class-Path': '../../lib/resources.jar'
+        )
+	}
+}
+
+dependencies {
+	compile files('lib/resources.jar')
+}
