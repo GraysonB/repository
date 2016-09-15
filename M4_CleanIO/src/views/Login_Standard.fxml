@@ -37,8 +37,8 @@
                <children>
                   <VBox fx:id="vbox_r" alignment="TOP_CENTER" layoutX="81.0" layoutY="75.0" spacing="15.0">
                      <children>
-                        <TextField promptText="Username" />
-                        <PasswordField promptText="Password" />
+                        <TextField fx:id="username_log" promptText="Username" />
+                        <PasswordField fx:id="password_log" promptText="Password" />
                         <Button fx:id="btn_login_verify" mnemonicParsing="false" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #FFFFFF;" text="Login with a Clean.IO account">
                            <font>
                               <Font size="12.0" />
@@ -46,7 +46,7 @@
                         </Button>
                         <Label />
                         <Label alignment="CENTER" text="Haven't Registered Yet" textAlignment="CENTER" textFill="WHITE" />
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="Register a Clean.IO account!">
+                        <Button fx:id="btn_register_login" mnemonicParsing="false" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="Register a Clean.IO account!">
                            <font>
                               <Font size="12.0" />
                            </font>
