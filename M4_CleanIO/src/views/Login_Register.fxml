@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -35,13 +36,15 @@
             </Pane>
             <Pane layoutX="330.0" prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: #29B6F6;" translateZ="3.0">
                <children>
-                  <VBox fx:id="vbox_r" layoutX="81.0" layoutY="75.0" spacing="15.0">
+                  <VBox fx:id="vbox_r" layoutX="81.0" layoutY="20.0" spacing="15.0">
                      <children>
                         <TextField fx:id="name" prefWidth="190.0" promptText="Name" />
                         <TextField fx:id="username_input_r" promptText="Username" />
+                        <TextField fx:id="address_r" promptText="Address" />
                         <TextField fx:id="email_r" accessibleRole="PASSWORD_FIELD" promptText="Email Address" />
                         <PasswordField fx:id="password_r" promptText="Password" />
                         <PasswordField fx:id="password_confirm_r" promptText="Confirm Password" />
+                        <ComboBox prefWidth="190.0" promptText="Account Type" style="-fx-background-color: white;" visibleRowCount="4" />
                         <Button fx:id="btn_register_verify" mnemonicParsing="false" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #FFFFFF;" text="Register">
                            <font>
                               <Font size="12.0" />
