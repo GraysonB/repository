@@ -28,7 +28,11 @@ public class Login_StandardController {
 
     @FXML
     public void loginCleanIOPressed() {
-        if (!username_log.getText().equals("user") && !password_log.getText().equals("password")) {
+        if (username_log.getText().equals("user") && password_log.getText().equals("password")) {
+            username_log.clear();
+            password_log.clear();
+            mainApplication.showInApplication_Standard();
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(mainApplication.getMainScreen());
             alert.setTitle("Error");
@@ -37,6 +41,9 @@ public class Login_StandardController {
 
             alert.showAndWait();
         }
+
     }
+
+
 
 }

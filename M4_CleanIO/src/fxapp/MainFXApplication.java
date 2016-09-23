@@ -1,6 +1,7 @@
 package fxapp;
 
 
+import controller.InApplication_StandardController;
 import controller.Login_StandardController;
 import controller.Login_StartController;
 import javafx.application.Application;
@@ -28,13 +29,15 @@ public class MainFXApplication extends Application {
     /** the main container for the application window */
     private Stage mainScreen;
 
+    public Scene scene;
+
 //    /** the main layout for the main window */
 //    private BorderPane rootLayout;
 
     @Override
     public void start(Stage primaryStage) {
         mainScreen = primaryStage;
-        initRootLayout(mainScreen);
+        initRootLayout();
         //showCourseOverview(mainScreen);
     }
 
@@ -48,9 +51,8 @@ public class MainFXApplication extends Application {
     /**
      * Initialize the main screen for the application.  Most other views will be shown in this screen.
      *
-     * @param mainScreen  the main Stage window of the application
      */
-    private void initRootLayout(Stage mainScreen) {
+    private void initRootLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -66,6 +68,7 @@ public class MainFXApplication extends Application {
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(mainScreenLayout);
+            this.scene = scene;
             mainScreen.setScene(scene);
             mainScreen.show();
 
@@ -78,50 +81,21 @@ public class MainFXApplication extends Application {
     }
 
 
-    /**
-     * Setup our default application view that is shown on application startup
-     * This is displayed in the startup window
-     *
-     * precondition - the main stage is already initialized and showing (initRootLayout has been called)
-     * postcondition - the view is initialized and displayed
-     *
-     * @param mainScreen  the main stage to show this view in
-     */
-    private void showCourseOverview(Stage mainScreen) {
+    public void showInApplication_Standard() {
         try {
             // Load course overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/Login_Start.fxml"));
-            BorderPane courseOverview = loader.load();
-
-            // Set person overview into the center of root layout.
-            //rootLayout.setCenter(courseOverview);
-
-            // Give the controller access to the main app.
-            Login_StartController controller = loader.getController();
-            controller.setMainApp(this);
-
-        } catch (IOException e) {
-            //error on load, so log it
-            LOGGER.log(Level.SEVERE, "Failed to find the fxml file for CourseOverview!!");
-            e.printStackTrace();
-        }
-
-    }
-
-    public void showInputLoginInfo() {
-        try {
-            // Load course overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/Login_Standard.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource("../view/InApplication_Standard.fxml"));
             AnchorPane courseOverview = loader.load();
 
-            // Set person overview into the center of root layout.
-            //rootLayout.setCenter(courseOverview);
-
             // Give the controller access to the main app.
-            Login_StandardController controller = loader.getController();
+            InApplication_StandardController controller = loader.getController();
             controller.setMainApp(this);
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(courseOverview);
+            mainScreen.setScene(scene);
+            mainScreen.show();
 
         } catch (IOException e) {
             //error on load, so log it

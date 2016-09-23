@@ -2,11 +2,12 @@ package controller;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 
 /**
- * Created by Edwin on 9/21/2016.
+ * Created by Edwin on 9/23/2016.
  */
-public class Login_StartController {
+public class InApplication_StandardController {
 
     private MainFXApplication mainApplication;
 
@@ -15,8 +16,8 @@ public class Login_StartController {
         mainApplication = mainFXApplication;
     }
 
-//    @FXML
-//    public void loginCleanIOPressed() {
-//        mainApplication.showInputLoginInfo();
-//    }
+    @FXML
+    public void logoutOfApplication() {
+            mainApplication.getMainScreen().setScene(mainApplication.scene);
+    }
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login_StartController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login_StandardController">
    <right>
       <Pane prefHeight="400.0" prefWidth="330.0" style="-fx-background-color: #29B6F6;" BorderPane.alignment="CENTER">
          <children>
