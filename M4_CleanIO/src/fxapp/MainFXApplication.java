@@ -1,16 +1,13 @@
 package fxapp;
 
 
-import controller.LoginController;
 import controller.Login_StandardController;
 import controller.Login_StartController;
-import controller.MainScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,14 +28,14 @@ public class MainFXApplication extends Application {
     /** the main container for the application window */
     private Stage mainScreen;
 
-    /** the main layout for the main window */
-    private BorderPane rootLayout;
+//    /** the main layout for the main window */
+//    private BorderPane rootLayout;
 
     @Override
     public void start(Stage primaryStage) {
         mainScreen = primaryStage;
         initRootLayout(mainScreen);
-        showCourseOverview(mainScreen);
+        //showCourseOverview(mainScreen);
     }
 
     /**
@@ -57,18 +54,18 @@ public class MainFXApplication extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/MainScreen.fxml"));
-            rootLayout = loader.load();
+            loader.setLocation(MainFXApplication.class.getResource("../view/Login_Standard.fxml"));
+            AnchorPane mainScreenLayout = loader.load();
 
             // Give the controller access to the main app.
-            MainScreenController controller = loader.getController();
+            Login_StandardController controller = loader.getController();
             controller.setMainApp(this);
 
             // Set the Main App title
-            mainScreen.setTitle("Course Registration");
+            mainScreen.setTitle("Clean IO");
 
             // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
+            Scene scene = new Scene(mainScreenLayout);
             mainScreen.setScene(scene);
             mainScreen.show();
 
@@ -98,7 +95,7 @@ public class MainFXApplication extends Application {
             BorderPane courseOverview = loader.load();
 
             // Set person overview into the center of root layout.
-            rootLayout.setCenter(courseOverview);
+            //rootLayout.setCenter(courseOverview);
 
             // Give the controller access to the main app.
             Login_StartController controller = loader.getController();
@@ -120,7 +117,7 @@ public class MainFXApplication extends Application {
             AnchorPane courseOverview = loader.load();
 
             // Set person overview into the center of root layout.
-            rootLayout.setCenter(courseOverview);
+            //rootLayout.setCenter(courseOverview);
 
             // Give the controller access to the main app.
             Login_StandardController controller = loader.getController();
