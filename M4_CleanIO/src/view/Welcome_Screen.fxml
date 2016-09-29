@@ -12,7 +12,7 @@
       <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#goToLoginScreen" text="Login" />
-            <Button fx:id="registerButton" mnemonicParsing="false" text="Register" />
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#goToRegisterScreen" text="Register" />
          </children>
          <padding>
             <Insets right="10.0" top="10.0" />
