@@ -55,6 +55,6 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutY="71.0" stroke="BLACK"
                    strokeType="INSIDE"/>
         <Button fx:id="cancel_button" layoutX="264.0" layoutY="14.0" mnemonicParsing="false"
-                onAction="#goBackToWelcome" text="Cancel"/>
+                onAction="#goToWelcomeScene" text="Cancel"/>
     </Pane>
 </AnchorPane>

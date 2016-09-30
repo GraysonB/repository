@@ -33,7 +33,7 @@
             <children>
                 <VBox alignment="TOP_CENTER" layoutX="81.0" layoutY="75.0" spacing="15.0">
                     <children>
-                        <Button fx:id="logout" mnemonicParsing="false" onAction="#logoutOfApplication" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #FFFFFF;" text="Logout">
+                        <Button fx:id="logout" mnemonicParsing="false" onAction="#goToWelcomeScene" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #FFFFFF;" text="Logout">
                             <font>
                                 <Font size="12.0" />
                             </font>
