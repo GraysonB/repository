@@ -1,51 +1,89 @@
 package controller;
 
 import fxapp.Main;
-import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.AccountType;
+import model.Model;
+import model.Profile;
 
-import java.io.IOException;
-
-/**
- * Created by edwinvillatoro on 9/29/16.
- */
 public class Register_Controller {
+
     private Main mainApplication;
 
-    @FXML
-    private Button sign_in_button;
+    /** the student whose data is being manipulated*/
+    private Profile _profile;
 
     @FXML
-    private Button register_cancel_button;
+    private TextField usernameField;
 
     @FXML
-    public void goToLoginScreen() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../view/Login_Screen.fxml"));
-        AnchorPane loginScreenLayout = loader.load();
-        Stage stage = mainApplication.getWindow();
-        // Give the controller access to the main app.
-        Login_Controller controller = loader.getController();
-        controller.setMainApp(mainApplication);
-        Scene scene = new Scene(loginScreenLayout);
-        stage.setScene(scene);
-        stage.show();
-    }
+    private TextField passwordField;
 
     @FXML
-    private void goToWelcomeScreen() throws IOException {
-        mainApplication.start(mainApplication.getWindow());
-    }
+    private ComboBox<AccountType> accountTypes;
 
+    private boolean _submitClicked = false;
+    
+    private Stage _dialogStage;
 
     public void setMainApp(Main mainFXApplication) {
-
         mainApplication = mainFXApplication;
     }
+
+    @FXML
+    private void initialize() {
+        accountTypes.getItems().setAll(AccountType.values());
+        accountTypes.setValue(AccountType.USER);
+    }
+
+    @FXML
+    public void goToLoginScreen() {
+        _dialogStage.close();
+        mainApplication.displayLoginScene();
+    }
+
+    @FXML
+    private void goToWelcomeScreen() {
+        _dialogStage.close();
+        mainApplication.displayWelcomeScene();
+    }
+    
+    public void setDialogStage(Stage dialogStage) {
+        _dialogStage = dialogStage;
+    }
+    
+    public void setProfile(Profile profile) {
+        //remember the current profile
+        _profile = profile;
+
+        if (_profile == null)
+            System.out.println("Profile was null");
+        
+    }
+    
+    public boolean isSubmitClicked() {
+        return _submitClicked;
+    }
+
+    /**
+     * Button handler for add profile
+     */
+    @FXML
+    public void submitProfilePressed() {
+        _profile.setUsername(usernameField.getText());
+        _profile.setPassword(passwordField.getText());
+        _profile.setAccountType(accountTypes.getSelectionModel().getSelectedItem());
+        //signal success and close this dialog window.
+        _submitClicked = true;
+        _dialogStage.close();
+    }
+
 }

@@ -1,59 +1,56 @@
 package controller;
 
-/**
- * Created by Edwin on 9/26/2016.
- */
-
 import fxapp.Main;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import model.Model;
+import model.Profile;
 
 import java.io.IOException;
 
 public class Welcome_Controller {
+
+    /** a link back to the main application class */
     private Main mainApplication;
 
-    @FXML
-    Button loginButton;
-
-    @FXML
-    Button registerButton;
-
-    @FXML
-    public void goToLoginScreen() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../view/Login_Screen.fxml"));
-        AnchorPane loginScreenLayout = loader.load();
-        Stage stage = mainApplication.getWindow();
-        // Give the controller access to the main app.
-        Login_Controller controller = loader.getController();
-        controller.setMainApp(mainApplication);
-        Scene scene = new Scene(loginScreenLayout);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void goToRegisterScreen() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../view/Register_Screen.fxml"));
-        AnchorPane registerScreenLayout = loader.load();
-        Stage stage = mainApplication.getWindow();
-        // Give the controller access to the main app.
-        Register_Controller controller = loader.getController();
-        controller.setMainApp(mainApplication);
-        Scene scene = new Scene(registerScreenLayout);
-        stage.setScene(scene);
-        stage.show();
-    }
-
+    /**
+     * setup the main application link so we can call methods there
+     *
+     * @param mainFXApplication  a reference (link) to our main class
+     */
     public void setMainApp(Main mainFXApplication) {
-
         mainApplication = mainFXApplication;
     }
-}
 
+    /**
+     * called when the user clicks login
+     */
+    @FXML
+    private void handleLoginPressed() {
+        mainApplication.displayLoginScene();
+    }
+
+    /**
+     * called when the user clicks register
+     */
+    @FXML
+    private void handleRegisterPressed() throws IOException {
+        Profile tempProfile = new Profile();
+        boolean submitClicked = mainApplication.loadRegisterScene(tempProfile);
+        if (submitClicked) {
+            if (!Model.getInstance().addProfile(tempProfile)) {
+                //if the add fails, notify the user
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(mainApplication.getWindow());
+                alert.setTitle("Profile Not Added");
+                alert.setHeaderText("Bad Profile Add");
+                alert.setContentText("Profile was not added, check that they are not already in server!");
+
+                alert.showAndWait();
+            } else {
+                System.out.println(tempProfile + " added to server");
+                mainApplication.loadMainInApplication(tempProfile);
+            }
+        }
+    }
+}

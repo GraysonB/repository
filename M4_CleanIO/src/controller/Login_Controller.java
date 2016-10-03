@@ -2,55 +2,61 @@ package controller;
 
 import fxapp.Main;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Model;
+import model.Profile;
 
 import java.io.IOException;
 
 /**
- * Created by Edwin on 9/21/2016.
+ * controller for the login scene
  */
 public class Login_Controller {
+
+    /** a link back to the main application class */
     private Main mainApplication;
 
     @FXML
-    private TextField username_log;
+    private TextField usernameField;
 
     @FXML
-    private PasswordField password_log;
+    private PasswordField passwordField;
 
-    @FXML
-    private Button login_CleanIO;
-
-    @FXML
-    public void goBackToWelcome() throws IOException {
-        mainApplication.start(mainApplication.getWindow());
+    /**
+     * setup the main application link so we can call methods there
+     *
+     * @param mainFXApplication  a reference (link) to our main class
+     */
+    public void setMainApp(Main mainFXApplication) {
+        mainApplication = mainFXApplication;
     }
 
+    /**
+     * called when the user clicks cancel
+     */
     @FXML
-    public void loginCleanIOPressed() throws IOException{
-        if (username_log.getText().equals("user") && password_log.getText().equals("password")) {
-            username_log.clear();
-            password_log.clear();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../view/Main_InApplication_Screen.fxml"));
-            AnchorPane mainInApplicationScreenLayout = loader.load();
-            Stage stage = mainApplication.getWindow();
-            // Give the controller access to the main app.
-            Main_InApplication_Controller controller = loader.getController();
-            controller.setMainApp(mainApplication);
-            Scene scene = new Scene(mainInApplicationScreenLayout);
-            stage.setScene(scene);
-            stage.show();
+    public void handleCancelPressed() {
+        mainApplication.displayWelcomeScene();
+    }
+
+    /**
+     * called when the user clicks login
+     */
+    @FXML
+    public void handleLoginCleanIOPressed() throws IOException {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        if (Model.getInstance().getServer().searchProfile(username, password)) {
+            Profile profile = Model.getInstance().getServer().getProfile(username, password);
+            usernameField.clear();
+            passwordField.clear();
+            mainApplication.loadMainInApplication(profile);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            Stage stage =(Stage) login_CleanIO.getScene().getWindow();
+            Stage stage = mainApplication.getWindow();
             alert.initOwner(stage);
             alert.setTitle("Error");
             alert.setHeaderText("wrong username or password");
@@ -60,8 +66,27 @@ public class Login_Controller {
         }
     }
 
-    public void setMainApp(Main mainFXApplication) {
+    /**
+     * called when the user clicks register
+     */
+    @FXML
+    private void handleRegisterPressed() throws IOException {
+        Profile tempProfile = new Profile();
+        boolean submitClicked = mainApplication.loadRegisterScene(tempProfile);
+        if (submitClicked) {
+            if (!Model.getInstance().addProfile(tempProfile)) {
+                //if the add fails, notify the user
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(mainApplication.getWindow());
+                alert.setTitle("Profile Not Added");
+                alert.setHeaderText("Bad Profile Add");
+                alert.setContentText("Profile was not added, check that they are not already in server!");
 
-        mainApplication = mainFXApplication;
+                alert.showAndWait();
+            } else {
+                System.out.println(tempProfile + " added to server");
+                mainApplication.loadMainInApplication(tempProfile);
+            }
+        }
     }
 }
