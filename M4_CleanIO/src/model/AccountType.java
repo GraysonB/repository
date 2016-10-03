@@ -11,7 +11,7 @@ public enum AccountType {
 
     private final String type;
 
-    AccountType(String s) {
+    AccountType (String s) {
         type = s;
     }
 
