@@ -32,6 +32,12 @@ public class Main extends Application {
         return window;
     }
 
+
+    /**
+     * lmao?
+     * @param primaryStage
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         window = primaryStage;
@@ -53,11 +59,18 @@ public class Main extends Application {
         //loadMainInApplication();
     }
 
+    /**
+     * displays welcome screen
+     */
     public void displayWelcomeScene() {
         window.setScene(welcomeScene);
         window.show();
     }
 
+    /**
+     * loads login scene
+     * @throws IOException
+     */
     private void loadLoginScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Login_Screen.fxml"));
@@ -70,11 +83,20 @@ public class Main extends Application {
         loginScene = new Scene(loginScreenLayout);
     }
 
+    /**
+     * displays login scene
+     */
     public void displayLoginScene() {
         window.setScene(loginScene);
         window.show();
     }
 
+    /**
+     * loads a register scene
+     * @param profile profile to be manipulated
+     * @return true if submit button was clicked, otherwise false
+     * @throws IOException thrown if file not found
+     */
     public boolean loadRegisterScene(Profile profile) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Register_Screen.fxml"));
@@ -115,6 +137,11 @@ public class Main extends Application {
 //        window.show();
 //    }
 
+    /**
+     * loads the main page of the main application
+     * @param profile profile that is logged in
+     * @throws IOException thrown when file not found
+     */
     public void loadMainInApplication(Profile profile) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Main_InApplication_Screen.fxml"));
@@ -130,6 +157,11 @@ public class Main extends Application {
 
     }
 
+    /**
+     * shows the profile edit dialog
+     * @param profile profile to be manipulated
+     * @return true if okay button is pressed
+     */
     public boolean showProfileEditDialog(Profile profile) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.

@@ -22,6 +22,9 @@ public class Model {
     private final Profile theNullProfile = new Profile("No Such Profile", "9999", AccountType.USER);
 
 
+    /**
+     * makes a model with a new server and set a default profile
+     */
     private Model () {
         server = new Server();
         server.getProfiles().add(new Profile("user", "password", AccountType.USER));
@@ -37,6 +40,10 @@ public class Model {
         return server != null && server.addProfile(profile);
     }
 
+//    /**
+//     * returns the server of the application
+//     * @return server of application
+//     */
     public Server getServer() {
         return server;
     }

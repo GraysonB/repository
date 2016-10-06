@@ -34,32 +34,55 @@ public class Register_Controller {
     
     private Stage _dialogStage;
 
+    /**
+     * setup the main application link so we can call methods there
+     *
+     * @param mainFXApplication  a reference (link) to our main class
+     */
     public void setMainApp(Main mainFXApplication) {
         mainApplication = mainFXApplication;
     }
 
+    /**
+     * sets the comobo values to User, Manager, Worker, Admin
+     */
     @FXML
     private void initialize() {
-        accountTypes.getItems().setAll(AccountType.values());
+//        accountTypes.getItems().setAll(AccountType.values());
+        accountTypes.setItems(Profile.getAccountTypes());
         accountTypes.setValue(AccountType.USER);
     }
 
+    /**
+     * called when the user clicks login
+     */
     @FXML
     public void goToLoginScreen() {
         _dialogStage.close();
         mainApplication.displayLoginScene();
     }
 
+    /**
+     * called when the user clicks cancel
+     */
     @FXML
     private void goToWelcomeScreen() {
         _dialogStage.close();
         mainApplication.displayWelcomeScene();
     }
-    
+
+    /**
+     * sets the dialog stage of the register
+     * @param dialogStage
+     */
     public void setDialogStage(Stage dialogStage) {
         _dialogStage = dialogStage;
     }
-    
+
+    /**
+     * sets profile to be modified
+     * @param profile profile to be modified
+     */
     public void setProfile(Profile profile) {
         //remember the current profile
         _profile = profile;
@@ -68,7 +91,10 @@ public class Register_Controller {
             System.out.println("Profile was null");
         
     }
-    
+
+    /**
+     * called when the user clicks submit
+     */
     public boolean isSubmitClicked() {
         return _submitClicked;
     }

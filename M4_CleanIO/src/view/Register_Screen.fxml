@@ -24,7 +24,8 @@
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
                               <Button fx:id="submit_button" mnemonicParsing="false" onAction="#submitProfilePressed" text="Submit" />
-                              <ComboBox fx:id="accountTypes" visibleRowCount="4" />
+                              <ComboBox fx:id="accountTypes" visibleRowCount="4"
+                              />
                            </children>
                         </HBox>
                      </children>
