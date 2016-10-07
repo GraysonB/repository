@@ -43,6 +43,17 @@ public class Water_Source_Report_Controller {
     }
 
     /**
+     * sets the combobox with account types
+     */
+    @FXML
+    private void initialize() {
+        typeOfWaterBox.getItems().setAll(TypeOfWater.values());
+        typeOfWaterBox.setValue(TypeOfWater.Bottled);
+
+        conditionOfWaterBox.getItems().setAll(ConditionOfWater.values());
+        conditionOfWaterBox.setValue(ConditionOfWater.Potable);
+    }
+    /**
      * called when the user clicks edit profile
      */
     @FXML
