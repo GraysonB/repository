@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 import model.Model;
 import model.Profile;
 
-import java.io.IOException;
-
 /**
  * controller for the login scene
  */
@@ -46,14 +44,15 @@ public class Login_Controller {
      * called when the user clicks login
      */
     @FXML
-    public void handleLoginCleanIOPressed() throws IOException {
+    public void handleLoginCleanIOPressed() {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (Model.getInstance().getServer().searchProfile(username, password)) {
             Profile profile = Model.getInstance().getServer().getProfile(username, password);
             usernameField.clear();
             passwordField.clear();
-            mainApplication.loadMainInApplication(profile);
+            mainApplication.getMainInApplicationController().setProfile(profile);
+            mainApplication.displayMainInApplicationScene();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             Stage stage = mainApplication.getWindow();
@@ -70,23 +69,8 @@ public class Login_Controller {
      * called when the user clicks register
      */
     @FXML
-    private void handleRegisterPressed() throws IOException {
-        Profile tempProfile = new Profile();
-        boolean submitClicked = mainApplication.loadRegisterScene(tempProfile);
-        if (submitClicked) {
-            if (!Model.getInstance().addProfile(tempProfile)) {
-                //if the add fails, notify the user
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initOwner(mainApplication.getWindow());
-                alert.setTitle("Profile Not Added");
-                alert.setHeaderText("Bad Profile Add");
-                alert.setContentText("Profile was not added, check that they are not already in server!");
-
-                alert.showAndWait();
-            } else {
-                System.out.println(tempProfile + " added to server");
-                mainApplication.loadMainInApplication(tempProfile);
-            }
-        }
+    private void handleRegisterPressed() {
+        mainApplication.getRegisterController().setProfile(new Profile());
+        mainApplication.displayRegisterScene();
     }
 }

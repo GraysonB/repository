@@ -1,24 +1,23 @@
 package controller;
 
 import fxapp.Main;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import model.AccountType;
 import model.Model;
 import model.Profile;
 
+/**
+ * controller for the register scene
+ */
 public class Register_Controller {
 
+    /** a link back to the main application class */
     private Main mainApplication;
 
-    /** the student whose data is being manipulated*/
+    /** the profile whose data is being manipulated*/
     private Profile _profile;
 
     @FXML
@@ -30,36 +29,44 @@ public class Register_Controller {
     @FXML
     private ComboBox<AccountType> accountTypes;
 
-    private boolean _submitClicked = false;
-    
-    private Stage _dialogStage;
-
+    /**
+     * setup the main application link so we can call methods there
+     *
+     * @param mainFXApplication  a reference (link) to our main class
+     */
     public void setMainApp(Main mainFXApplication) {
         mainApplication = mainFXApplication;
     }
 
+    /**
+     * sets the combobox with account types
+     */
     @FXML
     private void initialize() {
         accountTypes.getItems().setAll(AccountType.values());
         accountTypes.setValue(AccountType.USER);
     }
 
+    /**
+     * called when the user clicks login
+     */
     @FXML
-    public void goToLoginScreen() {
-        _dialogStage.close();
+    public void handleLoginPressed() {
         mainApplication.displayLoginScene();
     }
 
+    /**
+     * called when the user clicks cancel
+     */
     @FXML
-    private void goToWelcomeScreen() {
-        _dialogStage.close();
+    private void handleCancelPressed() {
         mainApplication.displayWelcomeScene();
     }
-    
-    public void setDialogStage(Stage dialogStage) {
-        _dialogStage = dialogStage;
-    }
-    
+
+    /**
+     * sets the profile who will try to register
+     * @param profile profile who will try to register
+     */
     public void setProfile(Profile profile) {
         //remember the current profile
         _profile = profile;
@@ -68,22 +75,30 @@ public class Register_Controller {
             System.out.println("Profile was null");
         
     }
-    
-    public boolean isSubmitClicked() {
-        return _submitClicked;
-    }
 
     /**
-     * Button handler for add profile
+     * called when the user clicks submit
      */
     @FXML
-    public void submitProfilePressed() {
+    public void handleSubmitPressed() {
         _profile.setUsername(usernameField.getText());
         _profile.setPassword(passwordField.getText());
         _profile.setAccountType(accountTypes.getSelectionModel().getSelectedItem());
-        //signal success and close this dialog window.
-        _submitClicked = true;
-        _dialogStage.close();
+
+        if (!Model.getInstance().addProfile(_profile)) {
+            //if the add fails, notify the user
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(mainApplication.getWindow());
+            alert.setTitle("Profile Not Added");
+            alert.setHeaderText("Bad Profile Add");
+            alert.setContentText("Profile was not added, check that they are not already in server!");
+
+            alert.showAndWait();
+        } else {
+            System.out.println(_profile + " added to server");
+            mainApplication.getMainInApplicationController().setProfile(_profile);
+            mainApplication.displayMainInApplicationScene();
+        }
     }
 
 }

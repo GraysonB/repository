@@ -6,9 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Profile;
 
 import java.io.IOException;
 
@@ -24,10 +22,26 @@ public class Main extends Application {
 
     private Scene mainInApplicationScene;
 
+    private Scene editProfileScene;
+
+    private Scene waterSourceReportScene;
+
+    private Register_Controller registerController;
+
+    private Main_InApplication_Controller mainInApplicationController;
+
+    private Edit_Profile_Controller editProfileController;
+
+    private Water_Source_Report_Controller waterSourceReportController;
+
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * window of application
+     * @return main stage of application
+     */
     public Stage getWindow() {
         return window;
     }
@@ -37,20 +51,26 @@ public class Main extends Application {
         window = primaryStage;
         primaryStage.setTitle("Clean.IO");
 
+        loadWelcomeScene();
+        loadLoginScene();
+        loadRegisterScene();
+        loadMainInApplication();
+        loadEditProfileScene();
+        loadWaterSourceScene();
+
+        displayWelcomeScene();
+    }
+
+    private void loadWelcomeScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Welcome_Screen.fxml"));
         BorderPane welcomeScreenLayout = loader.load();
-
 
         // Give the controller access to the main app.
         Welcome_Controller controller = loader.getController();
         controller.setMainApp(this);
 
         welcomeScene = new Scene(welcomeScreenLayout);
-        displayWelcomeScene();
-        loadLoginScene();
-        //loadRegisterScene(new Profile());
-        //loadMainInApplication();
     }
 
     public void displayWelcomeScene() {
@@ -75,93 +95,91 @@ public class Main extends Application {
         window.show();
     }
 
-    public boolean loadRegisterScene(Profile profile) throws IOException {
+    public Register_Controller getRegisterController() {
+        return registerController;
+    }
+
+    private void loadRegisterScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Register_Screen.fxml"));
         AnchorPane registerScreenLayout = loader.load();
 
-        // Create the dialog Stage.
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Add Profile");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(window);
-        Scene scene = new Scene(registerScreenLayout);
-        dialogStage.setScene(scene);
-
-        // Set the person into the controller.
+        // Give the controller access to the main app.
         Register_Controller controller = loader.getController();
-        controller.setDialogStage(dialogStage);
-        controller.setProfile(profile);
+        registerController = controller;
         controller.setMainApp(this);
 
-        dialogStage.showAndWait();
-
-        return controller.isSubmitClicked();
+        registerScene = new Scene(registerScreenLayout);
     }
 
-        // default stuff
-//        // Give the controller access to the main app.
-//        Register_Controller controller = loader.getController();
-//        controller.setMainApp(this);
-//        registerScene = new Scene(registerScreenLayout);
-//        window.setScene(registerScene);
-//
-//        controller.setProfile(profile);
-//        window.show();
+    public void displayRegisterScene() {
+        window.setScene(registerScene);
+        window.show();
+    }
 
-//    public void displayRegisterScene(Profile profile) throws IOException {
-//        loadRegisterScene(profile);
-//        window.setScene(registerScene);
-//        window.show();
-//    }
-
-    public void loadMainInApplication(Profile profile) throws IOException {
+    private void loadMainInApplication() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Main_InApplication_Screen.fxml"));
         AnchorPane mainInApplicationScreenLayout = loader.load();
 
         // Give the controller access to the main app.
         Main_InApplication_Controller controller = loader.getController();
+        mainInApplicationController = controller;
         controller.setMainApp(this);
-        controller.setProfile(profile);
+
         mainInApplicationScene = new Scene(mainInApplicationScreenLayout);
+    }
+
+    public void displayMainInApplicationScene() {
         window.setScene(mainInApplicationScene);
         window.show();
-
     }
 
-    public boolean showProfileEditDialog(Profile profile) {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
+    public Main_InApplication_Controller getMainInApplicationController() {
+        return mainInApplicationController;
+    }
+
+    private void loadEditProfileScene() throws IOException {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../view/ProfileEditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            loader.setLocation(Main.class.getResource("../view/Edit_Profile_Screen.fxml"));
+            AnchorPane editProfileScreenLayout = loader.load();
 
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Profile");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(window);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+            // Give the controller access to the main app.
+            Edit_Profile_Controller controller = loader.getController();
+            editProfileController = controller;
+            controller.setMainApp(this);
 
-            // Set the profile into the controller.
-            ProfileEditDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setProfile(profile);
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isOkClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+            editProfileScene = new Scene(editProfileScreenLayout);
     }
 
-//    public void displayMainInApplicationScene() {
-//        window.setScene(mainInApplicationScene);
-//        window.show();
-//    }
+    public void displayEditProfileScene() {
+        window.setScene(editProfileScene);
+        window.show();
+    }
+
+    public Edit_Profile_Controller getEditProfileController() {
+        return editProfileController;
+    }
+
+    private void loadWaterSourceScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Water_Source_Report_Screen.fxml"));
+        AnchorPane mainInApplicationScreenLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Water_Source_Report_Controller controller = loader.getController();
+        waterSourceReportController = controller;
+        controller.setMainApp(this);
+
+        waterSourceReportScene = new Scene(mainInApplicationScreenLayout);
+    }
+
+    public Water_Source_Report_Controller getWaterSourceReportController() {
+        return waterSourceReportController;
+    }
+
+    public void displayWaterSourceReportScene() {
+        window.setScene(waterSourceReportScene);
+        window.show();
+    }
 }

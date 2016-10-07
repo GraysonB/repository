@@ -2,17 +2,15 @@ package controller;
 
 import fxapp.Main;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import model.Profile;
 
-import java.io.IOException;
-
-
 public class Main_InApplication_Controller {
 
+    /** a link back to the main application class */
     private Main mainApplication;
 
+    /** the profile whose data is being manipulated*/
     private Profile profile;
 
     @FXML
@@ -29,7 +27,7 @@ public class Main_InApplication_Controller {
 
     /**
      * sets the profile that is logged in
-     * @param profile
+     * @param profile profile that is logged in
      */
     public void setProfile(Profile profile) {
         this.profile = profile;
@@ -37,24 +35,27 @@ public class Main_InApplication_Controller {
     }
 
     /**
+     * called when the user clicks submit water source report
+     */
+    @FXML
+    private void handleSubmitWaterSourceReportPressed() {
+        mainApplication.displayWaterSourceReportScene();
+    }
+
+    /**
      * called when the user clicks edit profile
      */
     @FXML
-    private void handleEditProfilePressed() throws IOException {
-        Profile selectedProfile = profile;
-        if (selectedProfile != null) {
-            boolean okClicked = mainApplication.showProfileEditDialog(selectedProfile);
-            if (okClicked) {
-                mainApplication.loadMainInApplication(selectedProfile);
-            }
-        }
+    private void handleEditProfilePressed() {
+        mainApplication.getEditProfileController().setProfile(profile);
+        mainApplication.displayEditProfileScene();
     }
 
     /**
      * called when the user clicks logout
      */
     @FXML
-    public void handleLogoutPressed() {
+    private void handleLogoutPressed() {
         mainApplication.displayWelcomeScene();
     }
 }

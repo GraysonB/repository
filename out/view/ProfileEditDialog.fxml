@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfileEditDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Edit_Profile_Controller">
    <children>
       <GridPane layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="500.0" vgap="5.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>
@@ -44,8 +44,8 @@
       </GridPane>
       <ButtonBar layoutX="10.0" layoutY="263.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <buttons>
-            <Button mnemonicParsing="false" onAction="#handleOk" text="Okay" />
-          <Button mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#handleOkPressed" text="Okay" />
+          <Button mnemonicParsing="false" onAction="#handleCancelPressed" text="Cancel" />
          </buttons>
       </ButtonBar>
    </children>

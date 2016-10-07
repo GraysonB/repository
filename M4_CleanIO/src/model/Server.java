@@ -2,9 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- * Created by edwinvillatoro on 9/30/16.
- */
 public class Server {
 
     /** the list of all registered profiles */
@@ -58,7 +55,7 @@ public class Server {
                 return true;
             }
         }
-
+        //never found the profile in the server
         return false;
     }
 

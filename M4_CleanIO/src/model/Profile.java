@@ -5,9 +5,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-/**
- * Created by edwinvillatoro on 9/29/16.
- */
 public class Profile {
 
     private final StringProperty _firstName = new SimpleStringProperty();
@@ -56,6 +53,12 @@ public class Profile {
         _accountType.set(accountType);
     }
 
+    /**
+     * makes a new profile
+     * @param username profile's username
+     * @param password profile's password
+     * @param accountType profile's account type
+     */
     public Profile (String username, String password, AccountType accountType) {
         _username.set(username);
         _password.set(password);

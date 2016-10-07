@@ -23,7 +23,7 @@
                         <TextField fx:id="passwordField" promptText="Password" />
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Button fx:id="submit_button" mnemonicParsing="false" onAction="#submitProfilePressed" text="Submit" />
+                              <Button fx:id="submit_button" mnemonicParsing="false" onAction="#handleSubmitPressed" text="Submit" />
                               <ComboBox fx:id="accountTypes" visibleRowCount="4" />
                            </children>
                         </HBox>
@@ -38,12 +38,12 @@
          <top>
             <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="sign_in_button" mnemonicParsing="false" onAction="#goToLoginScreen" text="Sign In">
+                  <Button fx:id="sign_in_button" mnemonicParsing="false" onAction="#handleLoginPressed" text="Sign In">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="register_cancel_button" mnemonicParsing="false" onAction="#goToWelcomeScreen" text="Cancel">
+                  <Button fx:id="register_cancel_button" mnemonicParsing="false" onAction="#handleCancelPressed" text="Cancel">
                      <HBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </HBox.margin>

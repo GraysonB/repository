@@ -2,9 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- * Created by edwinvillatoro on 9/30/16.
- */
 public class Model {
 
     private static final Model instance = new Model();
@@ -18,17 +15,18 @@ public class Model {
     /** a list of all the profiles in the server*/
     private final ArrayList<Profile> profiles = new ArrayList<>();
 
-    /** Null Object pattern, returned when no course is found */
+    /** Null Object pattern, returned when no profile is found */
     private final Profile theNullProfile = new Profile("No Such Profile", "9999", AccountType.USER);
 
 
     private Model () {
         server = new Server();
+        // default user to use to test
         server.getProfiles().add(new Profile("user", "password", AccountType.USER));
     }
 
     /**
-     * add a profile to the knows
+     * add a profile to the server
      *
      * @param profile the profile to add
      * @return true if profile added, false if not added
