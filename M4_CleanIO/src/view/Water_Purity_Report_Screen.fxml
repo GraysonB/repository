@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ADD8E6;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="261.0" layoutY="26.0" prefHeight="335.0" prefWidth="331.0">
+      <VBox layoutX="261.0" layoutY="26.0" prefHeight="335.0" prefWidth="331.0" spacing="3.0">
          <children>
             <HBox spacing="10.0">
                <children>
@@ -37,40 +37,40 @@
                   <TextField fx:id="locationOfWaterField" />
                </children>
             </HBox>
-            <HBox prefHeight="34.0" prefWidth="263.0" spacing="32.0">
+            <HBox prefHeight="34.0" prefWidth="263.0" spacing="35.0">
                <children>
                   <Label prefHeight="16.0" prefWidth="74.0" text="Virus PPM" />
-                  <TextField fx:id="virusPPMField" prefHeight="26.0" prefWidth="175.0" />
+                  <TextField fx:id="virusPPMField" prefHeight="26.0" prefWidth="164.0" />
                </children>
             </HBox>
-            <HBox prefHeight="34.0" prefWidth="305.0" spacing="5.0">
+            <HBox prefHeight="34.0" prefWidth="305.0" spacing="1.0">
                <children>
-                  <Label prefHeight="16.0" prefWidth="400.0" text="Contaminant PPM" />
-                  <TextField fx:id="contaminantPPMField" prefHeight="26.0" prefWidth="471.0" />
+                  <Label prefHeight="16.0" prefWidth="111.0" text="Contaminant PPM" />
+                  <TextField fx:id="contaminantPPMField" prefHeight="26.0" prefWidth="164.0" />
                </children>
             </HBox>
-            <HBox spacing="15.0">
+            <HBox spacing="17.0">
                <children>
                   <Label text="Report Number" />
-                  <TextField fx:id="reportNumberField" />
+                  <TextField fx:id="reportNumberField" prefHeight="26.0" prefWidth="171.0" />
                </children>
             </HBox>
-            <HBox prefHeight="34.0" prefWidth="297.0" spacing="15.0">
+            <HBox prefHeight="34.0" prefWidth="297.0" spacing="1.0">
                <children>
-                  <Label prefHeight="16.0" prefWidth="134.0" text="Condition of Water" />
-                  <ComboBox fx:id="conditionOfWaterBox" prefHeight="26.0" prefWidth="188.0" />
+                  <Label prefHeight="32.0" prefWidth="112.0" text="Condition of Water" />
+                  <ComboBox fx:id="conditionOfWaterBox" prefHeight="26.0" prefWidth="168.0" />
                </children>
             </HBox>
             <HBox prefHeight="26.0" prefWidth="305.0" spacing="22.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="89.0" text="Type of Water" />
-                  <ComboBox fx:id="tyepOfWaterBox" prefHeight="26.0" prefWidth="169.0" />
+                  <ComboBox fx:id="tyepOfWaterBox" prefHeight="26.0" prefWidth="173.0" />
                </children>
             </HBox>
             <HBox spacing="5.0">
                <children>
                   <Label text="Overall Condition" />
-                  <ComboBox fx:id="overallConditionBox" prefHeight="19.0" prefWidth="166.0" />
+                  <ComboBox fx:id="overallConditionBox" prefHeight="26.0" prefWidth="179.0" />
                </children>
             </HBox>
          </children>
