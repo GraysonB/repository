@@ -26,6 +26,8 @@ public class Main extends Application {
 
     private Scene waterSourceReportScene;
 
+    private Scene waterSourceReportOverviewScene;
+
     private Register_Controller registerController;
 
     private Main_InApplication_Controller mainInApplicationController;
@@ -57,10 +59,27 @@ public class Main extends Application {
         loadMainInApplication();
         loadEditProfileScene();
         loadWaterSourceScene();
+        loadWaterSourceReportOverView();
 
         displayWelcomeScene();
     }
 
+    private void loadWaterSourceReportOverView() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Water_Source_Report_Overview_Screen.fxml"));
+        AnchorPane waterSourceReportOverviewLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Water_Source_Report_Overview_Controller controller = loader.getController();
+        controller.setMainApp(this);
+
+        waterSourceReportOverviewScene = new Scene(waterSourceReportOverviewLayout);
+    }
+
+    public void displayWaterSourceReportOverviewScene() {
+        window.setScene(waterSourceReportOverviewScene);
+        window.show();
+    }
     private void loadWelcomeScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Welcome_Screen.fxml"));
@@ -174,12 +193,12 @@ public class Main extends Application {
         waterSourceReportScene = new Scene(mainInApplicationScreenLayout);
     }
 
-    public Water_Source_Report_Controller getWaterSourceReportController() {
-        return waterSourceReportController;
-    }
-
     public void displayWaterSourceReportScene() {
         window.setScene(waterSourceReportScene);
         window.show();
+    }
+
+    public Water_Source_Report_Controller getWaterSourceReportController() {
+        return waterSourceReportController;
     }
 }

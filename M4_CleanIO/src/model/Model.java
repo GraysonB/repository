@@ -1,5 +1,8 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Model {
@@ -15,9 +18,16 @@ public class Model {
     /** a list of all the profiles in the server*/
     private final ArrayList<Profile> profiles = new ArrayList<>();
 
+    /** a list of all the water source reports*/
+    private final ObservableList<WaterSourceReport> waterSourceReports = FXCollections.observableArrayList();
+
     /** Null Object pattern, returned when no profile is found */
     private final Profile theNullProfile = new Profile("No Such Profile", "9999", AccountType.USER);
 
+
+    public ObservableList<WaterSourceReport> getWaterSourceReports() {
+        return waterSourceReports;
+    }
 
     private Model () {
         server = new Server();

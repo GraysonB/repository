@@ -4,6 +4,7 @@ import fxapp.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.Profile;
+import model.WaterSourceReport;
 
 public class Main_InApplication_Controller {
 
@@ -39,7 +40,12 @@ public class Main_InApplication_Controller {
      */
     @FXML
     private void handleSubmitWaterSourceReportPressed() {
-        mainApplication.displayWaterSourceReportScene();
+        //mainApplication.getWaterSourceReportController().setProfile(profile);
+
+//        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport());
+//        mainApplication.displayWaterSourceReportScene();
+
+        mainApplication.displayWaterSourceReportOverviewScene();
     }
 
     /**
