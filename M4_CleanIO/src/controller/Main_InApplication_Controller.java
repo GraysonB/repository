@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import fxapp.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

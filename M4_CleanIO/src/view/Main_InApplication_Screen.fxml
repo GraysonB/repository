@@ -36,7 +36,7 @@
                   <Button fx:id="viewWaterAvailability" layoutX="21.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleViewWaterAvailabilityPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="View Water Availability" />
                   <Button fx:id="editProfile" layoutX="21.0" layoutY="171.0" mnemonicParsing="false" onAction="#handleEditProfilePressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="Edit Profile" />
                   <Button fx:id="submitWaterReport" layoutX="21.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleSubmitWaterReportPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="Submit Water Report" wrapText="true" />
-                  <Button fx:id="viewWaterSourceReports" layoutX="19.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleViewWaterSourceReportsPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="View Water Source Reports" />
+                  <Button fx:id="viewWaterSourceReports" layoutX="20.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleViewWaterSourceReportsPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="View Water Source Reports" />
                   </children>
               </Pane>
                   <Button fx:id="logout" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleLogoutPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #FFFFFF;" text="Logout">
