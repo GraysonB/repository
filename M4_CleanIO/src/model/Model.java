@@ -13,7 +13,7 @@ public class Model {
     }
 
     /** Server of project*/
-    private Server server;
+    private Database server;
 
     /** a list of all the profiles in the server*/
     private final ArrayList<Profile> profiles = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Model {
     }
 
     private Model () {
-        server = new Server();
+        server = new Database();
         // default user to use to test
         server.getProfiles().add(new Profile("user", "password", AccountType.USER));
     }
@@ -45,11 +45,11 @@ public class Model {
         return server != null && server.addProfile(profile);
     }
 
-    public Server getServer() {
+    public Database getServer() {
         return server;
     }
 
-    public void setServer(Server newServer) {
+    public void setServer(Database newServer) {
         server = newServer;
     }
 }

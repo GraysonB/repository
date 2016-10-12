@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Server {
+public class Database {
 
     /** the list of all registered profiles */
     private final ArrayList<Profile> _profiles;
@@ -10,9 +10,9 @@ public class Server {
     /**
      * makes a new server
      */
-    public Server() {
+    public Database() {
         _profiles = new ArrayList<>();
-        System.out.println("Server made");
+        System.out.println("Database made");
     }
 
     /**

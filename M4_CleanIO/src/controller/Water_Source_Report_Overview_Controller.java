@@ -94,6 +94,7 @@ public class Water_Source_Report_Overview_Controller {
     private void handleNewReportPressed() {
         mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport());
         //showWaterSourceReportDetails();
+        //mainApplication.getWaterSourceReportController().setProfile();
         mainApplication.displayWaterSourceReportScene();
     }
 

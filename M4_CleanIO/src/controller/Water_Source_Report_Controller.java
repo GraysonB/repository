@@ -17,7 +17,7 @@ public class Water_Source_Report_Controller {
     private WaterSourceReport waterSourceReport;
 
     /** the profile who is submitting the report*/
-    //private Profile profile;
+    private Profile profile;
 
     @FXML
     private TextField dateField;
@@ -49,25 +49,25 @@ public class Water_Source_Report_Controller {
         mainApplication = mainFXApplication;
     }
 
-//    /**
-//     * sets the profile that is submitting the report
-//     * @param profile profile that is logged in
-//     */
-//    public void setProfile(Profile profile) {
-//        this.profile = profile;
-//    }
+    /**
+     * sets the profile that is submitting the report
+     * @param profile profile that is logged in
+     */
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 
     public void setWaterSourceReport(WaterSourceReport waterSourceReport) {
         this.waterSourceReport = waterSourceReport;
         waterSourceReport.setDate("10/10/2016");
         waterSourceReport.setTime("4:20 blaze it");
-        //waterSourceReport.setNameOfReporter(profile.getUsername());
+        waterSourceReport.setNameOfReporter(profile.getUsername());
         waterSourceReport.setReportNumber(reportNumber);
 
         dateField.setText(waterSourceReport.getDate());
         timeField.setText(waterSourceReport.getTime());
         reportNumberField.setText(waterSourceReport.getReportNumber() + "");
-        nameOfWorkerField.setText("name");
+        nameOfWorkerField.setText(waterSourceReport.getNameOfReporter());
         locationOfWaterField.setText("");
     }
 

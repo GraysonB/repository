@@ -36,15 +36,16 @@
                       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" />
                   </children>
               </Pane>
-            <ButtonBar prefHeight="40.0" prefWidth="300.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <ButtonBar buttonMinWidth="0.0" prefHeight="94.0" prefWidth="320.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
               <buttons>
                         <Button fx:id="logout" mnemonicParsing="false" onAction="#handleLogoutPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #FFFFFF;" text="Logout">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </Button>
-                  <Button fx:id="editProfile" mnemonicParsing="false" onAction="#handleEditProfilePressed" text="Edit Profile" />
-                  <Button onAction="#handleSubmitWaterSourceReportPressed" mnemonicParsing="false" text="Submit Water" />
+                  <Button fx:id="editProfile" mnemonicParsing="false" onAction="#handleEditProfilePressed" text="Edit&#10;Profile" />
+                  <Button mnemonicParsing="false" onAction="#handleSubmitWaterSourceReportPressed" text="Submit Water Report" wrapText="true" />
+                  <Button mnemonicParsing="false" text="View&#10;Water&#10;Source&#10;Reports" />
               </buttons>
             </ButtonBar>
          </children>

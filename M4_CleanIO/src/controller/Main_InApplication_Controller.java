@@ -35,6 +35,9 @@ public class Main_InApplication_Controller {
         welcomeUser.setText("Welcome " + profile.getUsername());
     }
 
+
+
+
     /**
      * called when the user clicks submit water source report
      */
@@ -44,7 +47,7 @@ public class Main_InApplication_Controller {
 
 //        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport());
 //        mainApplication.displayWaterSourceReportScene();
-
+        mainApplication.getWaterSourceReportController().setProfile(profile);
         mainApplication.displayWaterSourceReportOverviewScene();
     }
 
