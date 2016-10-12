@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import model.Profile;
 import model.WaterSourceReport;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Main_InApplication_Controller {
 
     /** a link back to the main application class */
@@ -37,20 +40,18 @@ public class Main_InApplication_Controller {
     }
 
 
-
-
-    /**
-     * called when the user clicks submit water source report
-     */
-    @FXML
-    private void handleSubmitWaterSourceReportPressed() {
-        //mainApplication.getWaterSourceReportController().setProfile(profile);
-
-//        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport());
-//        mainApplication.displayWaterSourceReportScene();
-        mainApplication.getWaterSourceReportController().setProfile(profile);
-        mainApplication.displayWaterSourceReportOverviewScene();
-    }
+//    /**
+//     * called when the user clicks submit water source report
+//     */
+//    @FXML
+//    private void handleSubmitWaterSourceReportPressed() {
+//        //mainApplication.getWaterSourceReportController().setProfile(profile);
+//
+////        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport());
+////        mainApplication.displayWaterSourceReportScene();
+//        mainApplication.getWaterSourceReportController().setProfile(profile);
+//        mainApplication.displayWaterSourceReportOverviewScene();
+//    }
 
     /**
      * called when the user clicks edit profile
@@ -76,5 +77,24 @@ public class Main_InApplication_Controller {
     @FXML
     private void handleViewWaterAvailabilityPressed() {
         //TODO
+    }
+
+    @FXML
+    private void handleSubmitWaterReportPressed() {
+        Date yeah = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
+        String date = dateFormatter.format(yeah);
+        String time = timeFormatter.format(yeah);
+        mainApplication.getWaterSourceReportController().setProfile(profile);
+        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport(date, time));
+        //showWaterSourceReportDetails();
+        //mainApplication.getWaterSourceReportController().setProfile();
+        mainApplication.displayWaterSourceReportScene();
+    }
+
+    @FXML
+    private void handleViewWaterSourceReportsPressed(){
+        mainApplication.displayWaterSourceReportOverviewScene();
     }
 }

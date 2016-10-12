@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Water_Source_Report_Overview_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Water_Source_Report_Overview_Controller">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -60,7 +60,6 @@
                   </GridPane>
                   <ButtonBar buttonMinWidth="110.0" layoutX="146.0" layoutY="228.0" prefHeight="40.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <buttons>
-                        <Button mnemonicParsing="false" onAction="#handleNewReportPressed" text="New Report" />
                         <Button mnemonicParsing="false" onAction="#handleBackToMainMenuPressed" text="Back To Menu" />
                      </buttons>
                   </ButtonBar>

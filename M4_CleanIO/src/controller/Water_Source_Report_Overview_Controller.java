@@ -8,6 +8,9 @@ import javafx.scene.control.TableView;
 import model.Model;
 import model.WaterSourceReport;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Water_Source_Report_Overview_Controller {
 
     /** a link back to the main application class */
@@ -85,14 +88,6 @@ public class Water_Source_Report_Overview_Controller {
             typeOfWaterLabel.setText("");
             conditionOfWaterLabel.setText("");
         }
-    }
-
-    @FXML
-    private void handleNewReportPressed() {
-        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport());
-        //showWaterSourceReportDetails();
-        //mainApplication.getWaterSourceReportController().setProfile();
-        mainApplication.displayWaterSourceReportScene();
     }
 
     @FXML

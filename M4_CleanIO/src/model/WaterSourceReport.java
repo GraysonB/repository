@@ -75,7 +75,8 @@ public class WaterSourceReport {
             this._conditionOfWater.set(_conditionOfWater);
         }
 
-        public WaterSourceReport() {
-
+        public WaterSourceReport(String date, String time) {
+            _date.set(date);
+            _time.set(time);
         }
 }

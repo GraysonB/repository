@@ -59,8 +59,8 @@ public class Water_Source_Report_Controller {
 
     public void setWaterSourceReport(WaterSourceReport waterSourceReport) {
         this.waterSourceReport = waterSourceReport;
-        waterSourceReport.setDate("10/10/2016");
-        waterSourceReport.setTime("4:20 blaze it");
+        waterSourceReport.setDate(waterSourceReport.getDate());
+        waterSourceReport.setTime(waterSourceReport.getTime());
         waterSourceReport.setNameOfReporter(profile.getUsername());
         waterSourceReport.setReportNumber(reportNumber);
 
