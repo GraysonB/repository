@@ -8,9 +8,6 @@ import javafx.scene.control.TableView;
 import model.Model;
 import model.WaterSourceReport;
 
-/**
- * Created by edwinvillatoro on 10/10/16.
- */
 public class Water_Source_Report_Overview_Controller {
 
     /** a link back to the main application class */
