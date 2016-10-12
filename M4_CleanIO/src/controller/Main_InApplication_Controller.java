@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import fxapp.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -66,5 +67,14 @@ public class Main_InApplication_Controller {
     @FXML
     private void handleLogoutPressed() {
         mainApplication.displayWelcomeScene();
+    }
+
+    /**
+     * called when user clicks View Water Availability
+     * should display google map when pressed
+     */
+    @FXML
+    private void handleViewWaterAvailabilityPressed() {
+        //TODO
     }
 }
