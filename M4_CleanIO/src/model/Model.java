@@ -26,7 +26,6 @@ public class Model {
 
     private Profile loggedInProfile;
 
-
     public ObservableList<WaterSourceReport> getWaterSourceReports() {
         return waterSourceReports;
     }
