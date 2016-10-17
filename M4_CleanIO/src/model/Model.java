@@ -51,6 +51,10 @@ public class Model {
         return server;
     }
 
+    /**
+     * sets the profile that is logged in
+     * @param profile profile that is logged in
+     */
     public void setLoggedInProfile(Profile profile) {
         loggedInProfile = profile;
     }
@@ -59,7 +63,4 @@ public class Model {
         return loggedInProfile;
     }
 
-    public void setServer(Database newServer) {
-        server = newServer;
-    }
 }
