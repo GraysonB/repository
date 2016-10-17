@@ -28,6 +28,8 @@ public class Main extends Application {
 
     private Scene waterSourceReportOverviewScene;
 
+    private Scene waterAvailabilityScene;
+
     private Register_Controller registerController;
 
     private Main_InApplication_Controller mainInApplicationController;
@@ -37,6 +39,7 @@ public class Main extends Application {
     private Water_Source_Report_Controller waterSourceReportController;
 
     public static void main(String[] args) {
+        //System.setProperty("java.net.useSystemProxies", "true");
         launch(args);
     }
 
@@ -60,8 +63,26 @@ public class Main extends Application {
         loadEditProfileScene();
         loadWaterSourceScene();
         loadWaterSourceReportOverView();
+        loadWaterAvailabilityScene();
 
         displayWelcomeScene();
+    }
+
+    private void loadWaterAvailabilityScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Water_Availability_Screen.fxml"));
+        BorderPane waterSourceReportOverviewLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Water_Availability_Controller controller = loader.getController();
+        controller.setMainApp(this);
+
+        waterAvailabilityScene = new Scene(waterSourceReportOverviewLayout);
+    }
+
+    public void displayWaterAvailabilityScene() {
+        window.setScene(waterAvailabilityScene);
+        window.show();
     }
 
     private void loadWaterSourceReportOverView() throws IOException {

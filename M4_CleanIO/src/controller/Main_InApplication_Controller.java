@@ -75,7 +75,7 @@ public class Main_InApplication_Controller {
      */
     @FXML
     private void handleViewWaterAvailabilityPressed() {
-        //TODO
+        mainApplication.displayWaterAvailabilityScene();
     }
 
     @FXML
