@@ -26,11 +26,15 @@ public class Main extends Application {
 
     private Scene waterSourceReportOverviewScene;
 
+    private Scene waterPurityReportOverviewScene;
+
     private Scene waterAvailabilityScene;
 
     private Main_InApplication_Controller mainInApplicationController;
 
     private Edit_Profile_Controller editProfileController;
+
+    private Water_Availability_Controller waterAvailabilityController;
 
     public static void main(String[] args) {
         launch(args);
@@ -55,6 +59,7 @@ public class Main extends Application {
         loadMainInApplication();
         loadEditProfileScene();
         loadWaterSourceReportOverView();
+        loadWaterPurityReportOverView();
         loadWaterAvailabilityScene();
 
         displayWelcomeScene();
@@ -172,6 +177,23 @@ public class Main extends Application {
         window.show();
     }
 
+    private void loadWaterPurityReportOverView() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Water_Purity_Report_Overview_Screen.fxml"));
+        AnchorPane waterSourceReportOverviewLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Water_Purity_Report_Overview_Controller controller = loader.getController();
+        controller.setMainApp(this);
+
+        waterPurityReportOverviewScene = new Scene(waterSourceReportOverviewLayout);
+    }
+
+    public void displayWaterPurityReportOverviewScene() {
+        window.setScene(waterPurityReportOverviewScene);
+        window.show();
+    }
+
     private void loadWaterAvailabilityScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Water_Availability_Screen.fxml"));
@@ -179,6 +201,7 @@ public class Main extends Application {
 
         // Give the controller access to the main app.
         Water_Availability_Controller controller = loader.getController();
+        waterAvailabilityController = controller;
         controller.setMainApp(this);
 
         waterAvailabilityScene = new Scene(waterSourceReportOverviewLayout);
@@ -187,6 +210,10 @@ public class Main extends Application {
     public void displayWaterAvailabilityScene() {
         window.setScene(waterAvailabilityScene);
         window.show();
+    }
+
+    public Water_Availability_Controller getWaterAvailabilityController() {
+        return waterAvailabilityController;
     }
 
 }

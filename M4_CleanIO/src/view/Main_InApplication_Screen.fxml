@@ -40,6 +40,7 @@
                         <Button fx:id="viewWaterSourceReports" mnemonicParsing="false" onAction="#handleViewWaterSourceReportsPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="View Water Source Reports" />
                         <Button fx:id="editProfile" mnemonicParsing="false" onAction="#handleEditProfilePressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="Edit Profile" />
                         <Button fx:id="viewWaterAvailability" mnemonicParsing="false" onAction="#handleViewWaterAvailabilityPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="View Water Availability" />
+                        <Button fx:id="viewWaterPurityReports" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleViewWaterPurityReportsPressed" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: white;" text="View Water Purity Reports" />
                      </children>
                   </VBox>
                   </children>

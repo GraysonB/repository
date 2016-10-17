@@ -8,9 +8,6 @@ import javafx.scene.control.TableView;
 import model.Model;
 import model.WaterSourceReport;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * controller for the water source report overview
  */
@@ -32,7 +29,9 @@ public class Water_Source_Report_Overview_Controller {
     @FXML
     private Label nameOfWorkerLabel;
     @FXML
-    private Label locationOfWaterLabel;
+    private Label latOfLocationOfWaterLabel;
+    @FXML
+    private Label longOfLocationOfWaterLabel;
     @FXML
     private Label typeOfWaterLabel;
     @FXML
@@ -55,14 +54,14 @@ public class Water_Source_Report_Overview_Controller {
      */
     @FXML
     private void initialize() {
-        // Initialize the profile table with the one column
+        // Initialize the source table with the one column
         reportNumberColumn.setCellValueFactory(
-                cellData -> cellData.getValue().reportNumberProperty().asObject());
+                cellData -> cellData.getValue().getThisReportNumberProperty().asObject());
 
-        // Clear profile details.
+        // Clear water source details.
         showWaterSourceReportDetails(null);
 
-        // Listen for selection changes and show the profile details when changed.
+        // Listen for selection changes and show the water source report details when changed.
         waterSourceTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showWaterSourceReportDetails(newValue));
         reportNumberColumn.setStyle("-fx-alignment: CENTER;");
@@ -80,15 +79,17 @@ public class Water_Source_Report_Overview_Controller {
             dateLabel.setText(waterSourceReport.getDate());
             timeLabel.setText(waterSourceReport.getTime());
             nameOfWorkerLabel.setText(waterSourceReport.getNameOfReporter());
-            locationOfWaterLabel.setText(waterSourceReport.getLocation());
+            latOfLocationOfWaterLabel.setText(waterSourceReport.getLatitude().toString());
+            longOfLocationOfWaterLabel.setText(waterSourceReport.getLongitude().toString());
             typeOfWaterLabel.setText(waterSourceReport.getTypeOfWater().toString());
             conditionOfWaterLabel.setText(waterSourceReport.getConditionOfWater().toString());
         } else {
-            // Profile is null, remove all the text.
+            // water source is null, remove all the text.
             dateLabel.setText("");
             timeLabel.setText("");
             nameOfWorkerLabel.setText("");
-            locationOfWaterLabel.setText("");
+            latOfLocationOfWaterLabel.setText("");
+            longOfLocationOfWaterLabel.setText("");
             typeOfWaterLabel.setText("");
             conditionOfWaterLabel.setText("");
         }

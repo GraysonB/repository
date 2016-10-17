@@ -21,6 +21,9 @@ public class Model {
     /** a list of all the water source reports*/
     private final ObservableList<WaterSourceReport> waterSourceReports = FXCollections.observableArrayList();
 
+    /** a list of all the water purity reports*/
+    private final ObservableList<WaterPurityReport> waterPurityReports = FXCollections.observableArrayList();
+
     /** Null Object pattern, returned when no profile is found */
     private final Profile theNullProfile = new Profile("No Such Profile", "9999", AccountType.USER);
 
@@ -30,10 +33,16 @@ public class Model {
         return waterSourceReports;
     }
 
+    public ObservableList<WaterPurityReport> getWaterPurityReports() {
+        return waterPurityReports;
+    }
+
     private Model () {
         server = new Database();
         // default user to use to test
         server.getProfiles().add(new Profile("u", "p", AccountType.USER));
+        server.getProfiles().add(new Profile("w", "p", AccountType.WORKER));
+        server.getProfiles().add(new Profile("m", "p", AccountType.MANAGER));
     }
 
     /**
