@@ -24,6 +24,8 @@ public class Model {
     /** Null Object pattern, returned when no profile is found */
     private final Profile theNullProfile = new Profile("No Such Profile", "9999", AccountType.USER);
 
+    private Profile loggedInProfile;
+
 
     public ObservableList<WaterSourceReport> getWaterSourceReports() {
         return waterSourceReports;
@@ -32,7 +34,7 @@ public class Model {
     private Model () {
         server = new Database();
         // default user to use to test
-        server.getProfiles().add(new Profile("user", "password", AccountType.USER));
+        server.getProfiles().add(new Profile("u", "p", AccountType.USER));
     }
 
     /**
@@ -45,8 +47,16 @@ public class Model {
         return server != null && server.addProfile(profile);
     }
 
-    public Database getServer() {
+    public Database getDatabase() {
         return server;
+    }
+
+    public void setLoggedInProfile(Profile profile) {
+        loggedInProfile = profile;
+    }
+
+    public Profile getLoggedInProfile() {
+        return loggedInProfile;
     }
 
     public void setServer(Database newServer) {

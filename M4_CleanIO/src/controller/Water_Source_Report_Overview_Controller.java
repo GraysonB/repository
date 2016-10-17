@@ -11,6 +11,9 @@ import model.WaterSourceReport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * controller for the water source report overview
+ */
 public class Water_Source_Report_Overview_Controller {
 
     /** a link back to the main application class */
@@ -20,7 +23,7 @@ public class Water_Source_Report_Overview_Controller {
     private TableView<WaterSourceReport> waterSourceTable;
 
     @FXML
-    private TableColumn<WaterSourceReport, String> reportNumberColumn;
+    private TableColumn<WaterSourceReport, Integer> reportNumberColumn;
 
     @FXML
     private Label dateLabel;
@@ -52,9 +55,9 @@ public class Water_Source_Report_Overview_Controller {
      */
     @FXML
     private void initialize() {
-        // Initialize the profile table with the two columns.
+        // Initialize the profile table with the one column
         reportNumberColumn.setCellValueFactory(
-                cellData -> cellData.getValue().dateProperty());
+                cellData -> cellData.getValue().reportNumberProperty().asObject());
 
         // Clear profile details.
         showWaterSourceReportDetails(null);
@@ -62,6 +65,7 @@ public class Water_Source_Report_Overview_Controller {
         // Listen for selection changes and show the profile details when changed.
         waterSourceTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showWaterSourceReportDetails(newValue));
+        reportNumberColumn.setStyle("-fx-alignment: CENTER;");
     }
 
     /**
@@ -90,8 +94,12 @@ public class Water_Source_Report_Overview_Controller {
         }
     }
 
+    /**
+     * called when the user clicks back to main menu
+     */
     @FXML
     private void handleBackToMainMenuPressed() {
         mainApplication.displayMainInApplicationScene();
     }
+
 }

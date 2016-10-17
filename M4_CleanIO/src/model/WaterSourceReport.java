@@ -10,7 +10,7 @@ public class WaterSourceReport {
         private final StringProperty _location = new SimpleStringProperty();
         private final ObjectProperty<TypeOfWater> _typeOfWater = new SimpleObjectProperty<>();
         private final ObjectProperty<ConditionOfWater> _conditionOfWater = new SimpleObjectProperty<>();
-
+        private static int reportNumber = 1;
         public String getDate() {
             return _date.get();
         }
@@ -78,5 +78,7 @@ public class WaterSourceReport {
         public WaterSourceReport(String date, String time) {
             _date.set(date);
             _time.set(time);
+            setReportNumber(reportNumber);
+            reportNumber++;
         }
 }

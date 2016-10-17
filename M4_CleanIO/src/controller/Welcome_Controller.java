@@ -35,4 +35,5 @@ public class Welcome_Controller {
     private void handleRegisterPressed() {
         mainApplication.displayRegisterScene();
     }
+
 }
