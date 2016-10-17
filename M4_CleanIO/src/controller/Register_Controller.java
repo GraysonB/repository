@@ -17,9 +17,6 @@ public class Register_Controller {
     /** a link back to the main application class */
     private Main mainApplication;
 
-    /** the profile whose data is being manipulated*/
-    private Profile _profile;
-
     @FXML
     private TextField usernameField;
 
@@ -27,7 +24,7 @@ public class Register_Controller {
     private TextField passwordField;
 
     @FXML
-    private ComboBox<AccountType> accountTypes;
+    private ComboBox<AccountType> accountTypeComboBox;
 
     /**
      * setup the main application link so we can call methods there
@@ -39,12 +36,12 @@ public class Register_Controller {
     }
 
     /**
-     * sets the combobox with account types
+     * sets the combo box with account types
      */
     @FXML
     private void initialize() {
-        accountTypes.getItems().setAll(AccountType.values());
-        accountTypes.setValue(AccountType.USER);
+        accountTypeComboBox.getItems().setAll(AccountType.values());
+        accountTypeComboBox.setValue(AccountType.USER);
     }
 
     /**
@@ -64,40 +61,64 @@ public class Register_Controller {
     }
 
     /**
-     * sets the profile who will try to register
-     * @param profile profile who will try to register
-     */
-    public void setProfile(Profile profile) {
-        //remember the current profile
-        _profile = profile;
-
-        if (_profile == null)
-            System.out.println("Profile was null");
-        
-    }
-
-    /**
      * called when the user clicks submit
      */
     @FXML
     public void handleSubmitPressed() {
-        _profile.setUsername(usernameField.getText());
-        _profile.setPassword(passwordField.getText());
-        _profile.setAccountType(accountTypes.getSelectionModel().getSelectedItem());
+        if(isInputValid()) {
+            Profile profile = new Profile();
+            profile.setUsername(usernameField.getText());
+            profile.setPassword(passwordField.getText());
+            profile.setAccountType(accountTypeComboBox.getSelectionModel().getSelectedItem());
 
-        if (!Model.getInstance().addProfile(_profile)) {
-            //if the add fails, notify the user
+            if (!Model.getInstance().addProfile(profile)) {
+                //if the add fails, notify the user
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initOwner(mainApplication.getWindow());
+                alert.setTitle("Profile Not Added");
+                alert.setHeaderText("Bad Profile Add");
+                alert.setContentText("Profile was not added, check that they are not already in server!");
+
+                alert.showAndWait();
+            } else {
+                System.out.println(profile + " added to server");
+                mainApplication.getMainInApplicationController().setProfile(profile);
+                Model.getInstance().setLoggedInProfile(profile);
+                mainApplication.displayMainInApplicationScene();
+            }
+        }
+    }
+
+    /**
+     * validates the user input in the text fields.
+     * @return true if the input is valid
+     */
+    private boolean isInputValid() {
+        String errorMessage = "";
+
+        //for now just check they actually typed something
+        if (usernameField.getText() == null || usernameField.getText().length() == 0) {
+            errorMessage += "No valid username!\n";
+        }
+        if (passwordField.getText() == null || passwordField.getText().length() == 0) {
+            errorMessage += "No valid password entered!\n";
+        }
+
+
+        //no error message means success / good input
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message if bad data
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(mainApplication.getWindow());
-            alert.setTitle("Profile Not Added");
-            alert.setHeaderText("Bad Profile Add");
-            alert.setContentText("Profile was not added, check that they are not already in server!");
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText(errorMessage);
 
             alert.showAndWait();
-        } else {
-            System.out.println(_profile + " added to server");
-            mainApplication.getMainInApplicationController().setProfile(_profile);
-            mainApplication.displayMainInApplicationScene();
+
+            return false;
         }
     }
 
