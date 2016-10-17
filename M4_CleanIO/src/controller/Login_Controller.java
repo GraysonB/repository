@@ -45,23 +45,26 @@ public class Login_Controller {
      */
     @FXML
     public void handleLoginCleanIOPressed() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        if (Model.getInstance().getServer().searchProfile(username, password)) {
-            Profile profile = Model.getInstance().getServer().getProfile(username, password);
-            usernameField.clear();
-            passwordField.clear();
-            mainApplication.getMainInApplicationController().setProfile(profile);
-            mainApplication.displayMainInApplicationScene();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            Stage stage = mainApplication.getWindow();
-            alert.initOwner(stage);
-            alert.setTitle("Error");
-            alert.setHeaderText("wrong username or password");
-            //alert.setContentText("wrong username or password");
+        if (isInputValid()) {
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            if (Model.getInstance().getDatabase().searchProfile(username, password)) {
+                Profile profile = Model.getInstance().getDatabase().getProfile(username, password);
+                usernameField.clear();
+                passwordField.clear();
+                mainApplication.getMainInApplicationController().setProfile(profile);
+                Model.getInstance().setLoggedInProfile(profile);
+                mainApplication.displayMainInApplicationScene();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                Stage stage = mainApplication.getWindow();
+                alert.initOwner(stage);
+                alert.setTitle("Error");
+                alert.setHeaderText("wrong username or password");
+                //alert.setContentText("wrong username or password");
 
-            alert.showAndWait();
+                alert.showAndWait();
+            }
         }
     }
 
@@ -70,7 +73,40 @@ public class Login_Controller {
      */
     @FXML
     private void handleRegisterPressed() {
-        mainApplication.getRegisterController().setProfile(new Profile());
         mainApplication.displayRegisterScene();
     }
+
+    /**
+     * validates the user input in the text fields.
+     * @return true if the input is valid
+     */
+    private boolean isInputValid() {
+        String errorMessage = "";
+
+        //for now just check they actually typed something
+        if (usernameField.getText() == null || usernameField.getText().length() == 0) {
+            errorMessage += "No valid username!\n";
+        }
+        if (passwordField.getText() == null || passwordField.getText().length() == 0) {
+            errorMessage += "No valid password entered!\n";
+        }
+
+
+        //no error message means success / good input
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message if bad data
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(mainApplication.getWindow());
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText(errorMessage);
+
+            alert.showAndWait();
+
+            return false;
+        }
+    }
+
 }
