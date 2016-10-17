@@ -86,6 +86,9 @@ public class Water_Availability_Controller implements Initializable, MapComponen
 
     @FXML
     private void handleBackToMainMenuPressed() {
+        clearAll();
+        submitWaterPurityReportPane.setExpanded(false);
+        submitWaterReportPane.setExpanded(false);
         mainApplication.displayMainInApplicationScene();
     }
 
@@ -148,14 +151,9 @@ public class Water_Availability_Controller implements Initializable, MapComponen
     @FXML
     private void handleWaterReportTabPressed() {
         if (!submitWaterReportPane.isExpanded()) {
-            latitudeField.setText("");
-            longitudeField.setText("");
-            typeOfWaterComboBox.setValue(TypeOfWater.Bottled);
-            conditionOfWaterComboBox.setValue(ConditionOfWater.Potable);
-            map.removeMarker(lol);
-            int currentZoom = map.getZoom();
-            map.setZoom(currentZoom - 1);
-            map.setZoom(currentZoom);
+            clearAll();
+        } else if (!submitWaterPurityReportPane.isExpanded()) {
+            clearAll();
         }
     }
 
@@ -165,15 +163,9 @@ public class Water_Availability_Controller implements Initializable, MapComponen
     @FXML
     private void handleWaterPurityTabPressed() {
         if (!submitWaterPurityReportPane.isExpanded()) {
-            latitudeField1.setText("");
-            longitudeField1.setText("");
-            overallConditionComboBox.setValue(OverallCondition.Safe);
-            virusPPMField.setText("");
-            contaminantPPMField.setText("");
-            map.removeMarker(lol);
-            int currentZoom = map.getZoom();
-            map.setZoom(currentZoom - 1);
-            map.setZoom(currentZoom);
+            clearAll();
+        } else if (!submitWaterReportPane.isExpanded()) {
+            clearAll();
         }
     }
 
@@ -289,6 +281,23 @@ public class Water_Availability_Controller implements Initializable, MapComponen
 
             return false;
         }
+    }
+
+    private void clearAll() {
+        latitudeField.setText("");
+        longitudeField.setText("");
+        typeOfWaterComboBox.setValue(TypeOfWater.Bottled);
+        conditionOfWaterComboBox.setValue(ConditionOfWater.Potable);
+
+        latitudeField1.setText("");
+        longitudeField1.setText("");
+        overallConditionComboBox.setValue(OverallCondition.Safe);
+        virusPPMField.setText("");
+        contaminantPPMField.setText("");
+        map.removeMarker(lol);
+        int currentZoom = map.getZoom();
+        map.setZoom(currentZoom - 1);
+        map.setZoom(currentZoom);
     }
 
 }
