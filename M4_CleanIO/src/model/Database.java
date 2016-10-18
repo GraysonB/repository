@@ -3,6 +3,8 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.*;
+
 public class Database {
 
     /** the list of all registered profiles for this database */
@@ -14,11 +16,23 @@ public class Database {
     /** a list of all the water purity reports*/
     private final ObservableList<WaterPurityReport> waterPurityReports = FXCollections.observableArrayList();
 
+    private Connection con;
+    private PreparedStatement st;
+    private ResultSet rs;
+
     /**
-     * makes a new server
+     * * connects to a database
      */
     public Database() {
-        System.out.println("Database made");
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost/test?autoReconnect=true&useSSL=false";
+            Class.forName ("com.mysql.jdbc.Driver").newInstance ();
+            con = DriverManager.getConnection (url, "root", "edwin10285");
+            System.out.println("connection set");
+        } catch(Exception e) {
+            System.out.println("Error " + e);
+        }
     }
 
     /**
@@ -27,16 +41,33 @@ public class Database {
      * @return true if success, false if profile already in the database
      */
     public boolean addProfile(Profile profile) {
-        for (Profile p : profiles) {
-            if (p.getUsername().equals(profile.getUsername())) {
-                // found duplicate username
-                return false;
+        try {
+            String query = "SELECT 'username' FROM profiles WHERE username = ?";
+            st = con.prepareStatement(query);
+            st.setString(1, profile.getUsername());
+            rs = st.executeQuery();
+            if(!(rs.next())) {
+                profiles.add(profile);
+                return true;
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        //never found the profile so safe to add it
-        profiles.add(profile);
-        //return the success signal
-        return true;
+
+        return false;
+
+
+//        for (Profile p : profiles) {
+//            if (p.getUsername().equals(profile.getUsername())) {
+//                // found duplicate username
+//                return false;
+//            }
+//        }
+//        //never found the profile so safe to add it
+//        profiles.add(profile);
+//        //return the success signal
+//        return true;
     }
 
     /**
@@ -145,3 +176,66 @@ public class Database {
     }
 
 }
+//    /**
+//     * adds the requested profile
+//     * @param username the username trying to register
+//     * @return true if success, false if profile already in the server
+//     */
+//    public boolean isProfileInDatabase(String username, String password) {
+//        try {
+//            String query = "SELECT 'username' FROM profiles WHERE username = ? AND password = ?";
+//            st = con.prepareStatement(query);
+//            st.setString(1, username);
+//            st.setString(2, password);
+//            rs = st.executeQuery();
+//            if(rs.next()) {
+//                return true;
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return false;
+//    }
+//
+//    public void addProfileToDatabase(String username, String password, AccountType accountType) {
+//        try {
+//            String query = "INSERT INTO profiles (id, username, password, accountType) values (null, ?, ?, ?)";
+//            st = con.prepareStatement(query);
+//            st.setString(1, username);
+//            st.setString(2, password);
+//            st.setString(3, accountType.toString());
+//            st.execute();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    /**
+//     * returns the profile with the same username and password
+//     * @param username username of profile
+//     * @return returns the profile if there is a matching username and password, false otherwise
+//     */
+//    public Profile getProfile(String username) {
+//        try {
+//            String query = "SELECT * FROM profiles WHERE username = ?";
+//            st = con.prepareStatement(query);
+//            st.setString(1, username);
+//            rs = st.executeQuery();
+//
+//            if (rs.next()) {
+//                username = rs.getString("username");
+//                String password = rs.getString("password");
+//                Profile profile = new Profile(username, password, AccountType.USER);
+//                return profile;
+//            }
+//
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+//}
