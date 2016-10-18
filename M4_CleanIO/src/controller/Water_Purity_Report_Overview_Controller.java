@@ -47,7 +47,7 @@ public class Water_Purity_Report_Overview_Controller {
     public void setMainApp(Main mainFXApplication) {
         mainApplication = mainFXApplication;
 
-        waterPurityTable.setItems(Model.getInstance().getWaterPurityReports());
+        waterPurityTable.setItems(Model.getInstance().getDatabase().getWaterPurityReports());
     }
 
     /**

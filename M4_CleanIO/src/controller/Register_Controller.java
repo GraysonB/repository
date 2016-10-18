@@ -66,11 +66,7 @@ public class Register_Controller {
     @FXML
     public void handleSubmitPressed() {
         if(isInputValid()) {
-            Profile profile = new Profile();
-            profile.setUsername(usernameField.getText());
-            profile.setPassword(passwordField.getText());
-            profile.setAccountType(accountTypeComboBox.getSelectionModel().getSelectedItem());
-
+            Profile profile = new Profile(usernameField.getText(), passwordField.getText(), accountTypeComboBox.getSelectionModel().getSelectedItem());
             if (!Model.getInstance().addProfile(profile)) {
                 //if the add fails, notify the user
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -82,9 +78,12 @@ public class Register_Controller {
                 alert.showAndWait();
             } else {
                 System.out.println(profile + " added to server");
-                mainApplication.getMainInApplicationController().setProfile(profile);
-                Model.getInstance().setLoggedInProfile(profile);
-                mainApplication.displayMainInApplicationScene();
+                if (profile.getAccountType().equals(AccountType.ADMIN)) {
+                    mainApplication.displayAdminScene();
+                } else {
+                    mainApplication.getMainInApplicationController().setProfile(profile);
+                    mainApplication.displayMainInApplicationScene();
+                }
             }
         }
     }

@@ -187,7 +187,7 @@ public class Water_Availability_Controller implements Initializable, MapComponen
             ConditionOfWater conditionOfWater = conditionOfWaterComboBox.getSelectionModel().getSelectedItem();
             WaterSourceReport waterSourceReport
                     = new WaterSourceReport(date, time, nameOfReporter, latitude, longitude, typeOfWater, conditionOfWater);
-            Model.getInstance().getWaterSourceReports().add(waterSourceReport);
+            Model.getInstance().addWaterSourceReport(waterSourceReport);
 
             Marker marker = new Marker(new MarkerOptions());
             marker.setPosition(new LatLong(latitude, longitude));
@@ -225,7 +225,7 @@ public class Water_Availability_Controller implements Initializable, MapComponen
             Double contaminantPPM = Double.parseDouble(contaminantPPMField.getText());
             WaterPurityReport waterPurityReport
                     = new WaterPurityReport(date, time, nameOfReporter, latitude, longitude, overallCondition, virusPPM, contaminantPPM);
-            Model.getInstance().getWaterPurityReports().add(waterPurityReport);
+            Model.getInstance().addWaterPurityReport(waterPurityReport);
 
             map.removeMarker(lol);
             int currentZoom = map.getZoom();

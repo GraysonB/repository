@@ -30,6 +30,8 @@ public class Main extends Application {
 
     private Scene waterAvailabilityScene;
 
+    private Scene adminScene;
+
     private Main_InApplication_Controller mainInApplicationController;
 
     private Edit_Profile_Controller editProfileController;
@@ -61,6 +63,7 @@ public class Main extends Application {
         loadWaterSourceReportOverView();
         loadWaterPurityReportOverView();
         loadWaterAvailabilityScene();
+        loadAdminScene();
 
         displayWelcomeScene();
     }
@@ -214,6 +217,23 @@ public class Main extends Application {
 
     public Water_Availability_Controller getWaterAvailabilityController() {
         return waterAvailabilityController;
+    }
+
+    private void loadAdminScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Admin_Screen.fxml"));
+        BorderPane waterSourceReportOverviewLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Admin_Controller controller = loader.getController();
+        controller.setMainApp(this);
+
+        adminScene = new Scene(waterSourceReportOverviewLayout);
+    }
+
+    public void displayAdminScene() {
+        window.setScene(adminScene);
+        window.show();
     }
 
 }

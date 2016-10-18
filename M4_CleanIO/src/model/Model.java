@@ -1,10 +1,5 @@
 package model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
-
 public class Model {
 
     private static final Model instance = new Model();
@@ -12,51 +7,57 @@ public class Model {
         return instance;
     }
 
-    /** Server of project*/
-    private Database server;
+    /** database of project*/
+    private Database database;
 
-    /** a list of all the profiles in the server*/
-    private final ArrayList<Profile> profiles = new ArrayList<>();
-
-    /** a list of all the water source reports*/
-    private final ObservableList<WaterSourceReport> waterSourceReports = FXCollections.observableArrayList();
-
-    /** a list of all the water purity reports*/
-    private final ObservableList<WaterPurityReport> waterPurityReports = FXCollections.observableArrayList();
-
-    /** Null Object pattern, returned when no profile is found */
-    private final Profile theNullProfile = new Profile("No Such Profile", "9999", AccountType.USER);
-
+    /** remember the currently logged in profile*/
     private Profile loggedInProfile;
 
-    public ObservableList<WaterSourceReport> getWaterSourceReports() {
-        return waterSourceReports;
-    }
-
-    public ObservableList<WaterPurityReport> getWaterPurityReports() {
-        return waterPurityReports;
-    }
-
     private Model () {
-        server = new Database();
-        // default user to use to test
-        server.getProfiles().add(new Profile("u", "p", AccountType.USER));
-        server.getProfiles().add(new Profile("w", "p", AccountType.WORKER));
-        server.getProfiles().add(new Profile("m", "p", AccountType.MANAGER));
+        database = new Database();
+        // default profiles to use to test
+        database.getProfiles().add(new Profile("u", "p", AccountType.USER));
+        database.getProfiles().add(new Profile("w", "p", AccountType.WORKER));
+        database.getProfiles().add(new Profile("m", "p", AccountType.MANAGER));
+        database.getProfiles().add(new Profile("a", "p", AccountType.ADMIN));
     }
 
     /**
-     * add a profile to the server
+     * add a profile to the database
      *
-     * @param profile the profile to add
+     * @param profile the profile to add to the database
      * @return true if profile added, false if not added
      */
     public boolean addProfile(Profile profile) {
-        return server != null && server.addProfile(profile);
+        if (database != null && database.addProfile(profile)) {
+            loggedInProfile = profile;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * add a water source report to the database
+     *
+     * @param waterSourceReport the water source report to add to the database
+     * @return true if water source report added, false if not added
+     */
+    public boolean addWaterSourceReport(WaterSourceReport waterSourceReport) {
+        return database != null && database.addWaterSourceReport(waterSourceReport);
+    }
+
+    /**
+     * add a water purity report to the database
+     *
+     * @param waterPurityReport the water purity report to add to the database
+     * @return true if water purity report added, false if not added
+     */
+    public boolean addWaterPurityReport(WaterPurityReport waterPurityReport) {
+        return database != null && database.addWaterPurityReport(waterPurityReport);
     }
 
     public Database getDatabase() {
-        return server;
+        return database;
     }
 
     /**

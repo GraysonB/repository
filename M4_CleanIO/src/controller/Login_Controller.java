@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.AccountType;
 import model.Model;
 import model.Profile;
 
@@ -52,9 +53,13 @@ public class Login_Controller {
                 Profile profile = Model.getInstance().getDatabase().getProfile(username, password);
                 usernameField.clear();
                 passwordField.clear();
-                mainApplication.getMainInApplicationController().setProfile(profile);
-                Model.getInstance().setLoggedInProfile(profile);
-                mainApplication.displayMainInApplicationScene();
+                if (profile.getAccountType().equals(AccountType.ADMIN)) {
+                    mainApplication.displayAdminScene();
+                } else {
+                    mainApplication.getMainInApplicationController().setProfile(profile);
+                    Model.getInstance().setLoggedInProfile(profile);
+                    mainApplication.displayMainInApplicationScene();
+                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 Stage stage = mainApplication.getWindow();

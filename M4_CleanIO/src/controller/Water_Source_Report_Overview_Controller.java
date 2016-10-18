@@ -45,7 +45,7 @@ public class Water_Source_Report_Overview_Controller {
     public void setMainApp(Main mainFXApplication) {
         mainApplication = mainFXApplication;
 
-        waterSourceTable.setItems(Model.getInstance().getWaterSourceReports());
+        waterSourceTable.setItems(Model.getInstance().getDatabase().getWaterSourceReports());
     }
 
     /**
