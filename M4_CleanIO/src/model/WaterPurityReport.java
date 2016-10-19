@@ -3,25 +3,49 @@ package model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class WaterSourceReport {
+public class WaterPurityReport {
     private static int reportNumber = 1;
     private String date, time, nameOfReporter;
-    private Double latitude, longitude;
-    private TypeOfWater typeOfWater;
-    private ConditionOfWater conditionOfWater;
+    private Double latitude, longitude, virusPPM, contaminantPPM;
+    private OverallCondition overallCondition;
     private final IntegerProperty thisInstanceReportNumber = new SimpleIntegerProperty();
 
-    public WaterSourceReport(String date, String time, String nameOfReporter, Double latitude, Double longitude, TypeOfWater typeOfWater, ConditionOfWater conditionOfWater) {
+    public WaterPurityReport(String date, String time, String nameOfReporter, Double latitude, Double longitude, OverallCondition overallCondition, Double virusPPM, Double contaminantPPM) {
         this.date = date;
         this.time = time;
         this.nameOfReporter = nameOfReporter;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.typeOfWater = typeOfWater;
-        this.conditionOfWater = conditionOfWater;
+        this.overallCondition = overallCondition;
+        this.virusPPM = virusPPM;
+        this.contaminantPPM = contaminantPPM;
         this.thisInstanceReportNumber.setValue(reportNumber);
 
         reportNumber++;
+    }
+
+    public Double getVirusPPM() {
+        return virusPPM;
+    }
+
+    public void setVirusPPM(Double virusPPM) {
+        this.virusPPM = virusPPM;
+    }
+
+    public Double getContaminantPPM() {
+        return contaminantPPM;
+    }
+
+    public void setContaminantPPM(Double contaminantPPM) {
+        this.contaminantPPM = contaminantPPM;
+    }
+
+    public OverallCondition getOverallCondition() {
+        return overallCondition;
+    }
+
+    public void setOverallCondition(OverallCondition overallCondition) {
+        this.overallCondition = overallCondition;
     }
 
     public String getDate() {
@@ -69,23 +93,7 @@ public class WaterSourceReport {
     }
 
     public static void setReportNumber(int reportNumber) {
-        WaterSourceReport.reportNumber = reportNumber;
-    }
-
-    public TypeOfWater getTypeOfWater() {
-        return typeOfWater;
-    }
-
-    public void setTypeOfWater(TypeOfWater typeOfWater) {
-        this.typeOfWater = typeOfWater;
-    }
-
-    public ConditionOfWater getConditionOfWater() {
-        return conditionOfWater;
-    }
-
-    public void setConditionOfWater(ConditionOfWater conditionOfWater) {
-        this.conditionOfWater = conditionOfWater;
+        WaterPurityReport.reportNumber = reportNumber;
     }
 
     public int getThisInstanceReportNumber() {

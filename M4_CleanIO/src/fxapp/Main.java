@@ -24,22 +24,21 @@ public class Main extends Application {
 
     private Scene editProfileScene;
 
-    private Scene waterSourceReportScene;
-
     private Scene waterSourceReportOverviewScene;
+
+    private Scene waterPurityReportOverviewScene;
 
     private Scene waterAvailabilityScene;
 
-    private Register_Controller registerController;
+    private Scene adminScene;
 
     private Main_InApplication_Controller mainInApplicationController;
 
     private Edit_Profile_Controller editProfileController;
 
-    private Water_Source_Report_Controller waterSourceReportController;
+    private Water_Availability_Controller waterAvailabilityController;
 
     public static void main(String[] args) {
-        //System.setProperty("java.net.useSystemProxies", "true");
         launch(args);
     }
 
@@ -61,46 +60,14 @@ public class Main extends Application {
         loadRegisterScene();
         loadMainInApplication();
         loadEditProfileScene();
-        loadWaterSourceScene();
         loadWaterSourceReportOverView();
+        loadWaterPurityReportOverView();
         loadWaterAvailabilityScene();
+        loadAdminScene();
 
         displayWelcomeScene();
     }
 
-    private void loadWaterAvailabilityScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../view/Water_Availability_Screen.fxml"));
-        BorderPane waterSourceReportOverviewLayout = loader.load();
-
-        // Give the controller access to the main app.
-        Water_Availability_Controller controller = loader.getController();
-        controller.setMainApp(this);
-
-        waterAvailabilityScene = new Scene(waterSourceReportOverviewLayout);
-    }
-
-    public void displayWaterAvailabilityScene() {
-        window.setScene(waterAvailabilityScene);
-        window.show();
-    }
-
-    private void loadWaterSourceReportOverView() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../view/Water_Source_Report_Overview_Screen.fxml"));
-        AnchorPane waterSourceReportOverviewLayout = loader.load();
-
-        // Give the controller access to the main app.
-        Water_Source_Report_Overview_Controller controller = loader.getController();
-        controller.setMainApp(this);
-
-        waterSourceReportOverviewScene = new Scene(waterSourceReportOverviewLayout);
-    }
-
-    public void displayWaterSourceReportOverviewScene() {
-        window.setScene(waterSourceReportOverviewScene);
-        window.show();
-    }
     private void loadWelcomeScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Welcome_Screen.fxml"));
@@ -135,10 +102,6 @@ public class Main extends Application {
         window.show();
     }
 
-    public Register_Controller getRegisterController() {
-        return registerController;
-    }
-
     private void loadRegisterScene() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../view/Register_Screen.fxml"));
@@ -146,7 +109,6 @@ public class Main extends Application {
 
         // Give the controller access to the main app.
         Register_Controller controller = loader.getController();
-        registerController = controller;
         controller.setMainApp(this);
 
         registerScene = new Scene(registerScreenLayout);
@@ -201,25 +163,77 @@ public class Main extends Application {
         return editProfileController;
     }
 
-    private void loadWaterSourceScene() throws IOException {
+    private void loadWaterSourceReportOverView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../view/Water_Source_Report_Screen.fxml"));
-        AnchorPane mainInApplicationScreenLayout = loader.load();
+        loader.setLocation(Main.class.getResource("../view/Water_Source_Report_Overview_Screen.fxml"));
+        AnchorPane waterSourceReportOverviewLayout = loader.load();
 
         // Give the controller access to the main app.
-        Water_Source_Report_Controller controller = loader.getController();
-        waterSourceReportController = controller;
+        Water_Source_Report_Overview_Controller controller = loader.getController();
         controller.setMainApp(this);
 
-        waterSourceReportScene = new Scene(mainInApplicationScreenLayout);
+        waterSourceReportOverviewScene = new Scene(waterSourceReportOverviewLayout);
     }
 
-    public void displayWaterSourceReportScene() {
-        window.setScene(waterSourceReportScene);
+    public void displayWaterSourceReportOverviewScene() {
+        window.setScene(waterSourceReportOverviewScene);
         window.show();
     }
 
-    public Water_Source_Report_Controller getWaterSourceReportController() {
-        return waterSourceReportController;
+    private void loadWaterPurityReportOverView() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Water_Purity_Report_Overview_Screen.fxml"));
+        AnchorPane waterSourceReportOverviewLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Water_Purity_Report_Overview_Controller controller = loader.getController();
+        controller.setMainApp(this);
+
+        waterPurityReportOverviewScene = new Scene(waterSourceReportOverviewLayout);
     }
+
+    public void displayWaterPurityReportOverviewScene() {
+        window.setScene(waterPurityReportOverviewScene);
+        window.show();
+    }
+
+    private void loadWaterAvailabilityScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Water_Availability_Screen.fxml"));
+        BorderPane waterSourceReportOverviewLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Water_Availability_Controller controller = loader.getController();
+        waterAvailabilityController = controller;
+        controller.setMainApp(this);
+
+        waterAvailabilityScene = new Scene(waterSourceReportOverviewLayout);
+    }
+
+    public void displayWaterAvailabilityScene() {
+        window.setScene(waterAvailabilityScene);
+        window.show();
+    }
+
+    public Water_Availability_Controller getWaterAvailabilityController() {
+        return waterAvailabilityController;
+    }
+
+    private void loadAdminScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../view/Admin_Screen.fxml"));
+        BorderPane waterSourceReportOverviewLayout = loader.load();
+
+        // Give the controller access to the main app.
+        Admin_Controller controller = loader.getController();
+        controller.setMainApp(this);
+
+        adminScene = new Scene(waterSourceReportOverviewLayout);
+    }
+
+    public void displayAdminScene() {
+        window.setScene(adminScene);
+        window.show();
+    }
+
 }

@@ -2,23 +2,27 @@ package controller;
 
 import fxapp.Main;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.AccountType;
 import model.Profile;
-import model.WaterSourceReport;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+/**
+ * controller for the main in application screen
+ */
 public class Main_InApplication_Controller {
 
     /** a link back to the main application class */
     private Main mainApplication;
 
-    /** the profile whose data is being manipulated*/
+    /** the profile who is logged in*/
     private Profile profile;
 
     @FXML
     private Label welcomeUser;
+
+    @FXML
+    private Button viewWaterPurityReports;
 
     /**
      * setup the main application link so we can call methods there
@@ -36,21 +40,12 @@ public class Main_InApplication_Controller {
     public void setProfile(Profile profile) {
         this.profile = profile;
         welcomeUser.setText("Welcome " + profile.getUsername());
+        if (profile.getAccountType().equals(AccountType.MANAGER)) {
+            viewWaterPurityReports.setVisible(true);
+        } else {
+            viewWaterPurityReports.setVisible(false);
+        }
     }
-
-
-//    /**
-//     * called when the user clicks submit water source report
-//     */
-//    @FXML
-//    private void handleSubmitWaterSourceReportPressed() {
-//        //mainApplication.getWaterSourceReportController().setProfile(profile);
-//
-////        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport());
-////        mainApplication.displayWaterSourceReportScene();
-//        mainApplication.getWaterSourceReportController().setProfile(profile);
-//        mainApplication.displayWaterSourceReportOverviewScene();
-//    }
 
     /**
      * called when the user clicks edit profile
@@ -70,30 +65,28 @@ public class Main_InApplication_Controller {
     }
 
     /**
-     * called when user clicks View Water Availability
-     * should display google map when pressed
+     * called when user clicks view water availability
      */
     @FXML
     private void handleViewWaterAvailabilityPressed() {
+        mainApplication.getWaterAvailabilityController().setProfile(profile);
         mainApplication.displayWaterAvailabilityScene();
     }
 
-    @FXML
-    private void handleSubmitWaterReportPressed() {
-        Date yeah = new Date();
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
-        String date = dateFormatter.format(yeah);
-        String time = timeFormatter.format(yeah);
-        mainApplication.getWaterSourceReportController().setProfile(profile);
-        mainApplication.getWaterSourceReportController().setWaterSourceReport(new WaterSourceReport(date, time));
-        //showWaterSourceReportDetails();
-        //mainApplication.getWaterSourceReportController().setProfile();
-        mainApplication.displayWaterSourceReportScene();
-    }
-
+    /**
+     * called when user clicks view water source reports
+     */
     @FXML
     private void handleViewWaterSourceReportsPressed(){
         mainApplication.displayWaterSourceReportOverviewScene();
     }
+
+    /**
+     * called when user clicks view water purity reports
+     */
+    @FXML
+    private void handleViewWaterPurityReportsPressed() {
+        mainApplication.displayWaterPurityReportOverviewScene();
+    }
+
 }

@@ -2,7 +2,6 @@ package controller;
 
 import fxapp.Main;
 import javafx.fxml.FXML;
-import model.Profile;
 
 /**
  * controller for the welcome scene
@@ -34,7 +33,7 @@ public class Welcome_Controller {
      */
     @FXML
     private void handleRegisterPressed() {
-        mainApplication.getRegisterController().setProfile(new Profile());
         mainApplication.displayRegisterScene();
     }
+
 }
