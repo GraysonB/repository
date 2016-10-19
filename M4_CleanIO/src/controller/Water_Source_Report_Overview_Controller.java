@@ -65,8 +65,6 @@ public class Water_Source_Report_Overview_Controller {
         waterSourceTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showWaterSourceReportDetails(newValue));
         reportNumberColumn.setStyle("-fx-alignment: CENTER;");
-
-        Model.getInstance().loadWaterSourceReports();
     }
 
     /**

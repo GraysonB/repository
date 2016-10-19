@@ -15,6 +15,8 @@ public class Model {
 
     private Model () {
         database = new Database();
+        database.loadWaterPurityReports();
+        database.loadWaterSourceReports();
         // default profiles to use to test
         database.getProfiles().add(new Profile("u", "p", AccountType.USER));
         database.getProfiles().add(new Profile("w", "p", AccountType.WORKER));

@@ -11,14 +11,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.text.Text;
 import model.*;
 import netscape.javascript.JSObject;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -119,17 +118,45 @@ public class Water_Availability_Controller implements Initializable, MapComponen
                 map.addMarker(lol);
                 latitudeField.setText(hi.getLatitude() + "");
                 longitudeField.setText(hi.getLongitude() + "");
+                int currentZoom = map.getZoom();
+                map.setZoom(currentZoom - 1);
+                map.setZoom(currentZoom);
             } else if (submitWaterPurityReportPane.isExpanded()) {
                 LatLong hi = new LatLong((JSObject) obj.getMember("latLng"));
                 lol.setPosition(hi);
                 map.addMarker(lol);
                 latitudeField1.setText(hi.getLatitude() + "");
                 longitudeField1.setText(hi.getLongitude() + "");
+                int currentZoom = map.getZoom();
+                map.setZoom(currentZoom - 1);
+                map.setZoom(currentZoom);
             }
-            int currentZoom = map.getZoom();
-            map.setZoom(currentZoom - 1);
-            map.setZoom(currentZoom);
         });
+
+        Model facade = Model.getInstance();
+        List<WaterSourceReport> waterSourceReports = facade.getDatabase().getWaterSourceReports();
+
+        for (WaterSourceReport waterSourceReport : waterSourceReports) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            LatLong loc = new LatLong(waterSourceReport.getLatitude(), waterSourceReport.getLongitude());
+            markerOptions.position(loc)
+                    .visible(Boolean.TRUE);
+
+            Marker marker = new Marker(markerOptions);
+
+            map.addUIEventHandler(marker,
+                    UIEventType.click,
+                    (JSObject obj) -> {
+                        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                        infoWindowOptions.content(waterSourceReport.getTypeOfWater() + "<br>" + waterSourceReport.getConditionOfWater());
+
+                        InfoWindow window = new InfoWindow(infoWindowOptions);
+                        window.open(map, marker);
+                    });
+
+            map.addMarker(marker);
+        }
+
     }
 
     @Override
@@ -195,8 +222,8 @@ public class Water_Availability_Controller implements Initializable, MapComponen
                     UIEventType.click,
                     (JSObject obj) -> {
                         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                        infoWindowOptions.content(waterSourceReport.getConditionOfWater().toString() + " " +
-                                waterSourceReport.getTypeOfWater().toString());
+                        infoWindowOptions.content(waterSourceReport.getTypeOfWater().toString() + "<br>" +
+                                waterSourceReport.getConditionOfWater().toString());
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);
                         window.open(map, marker);

@@ -67,8 +67,6 @@ public class Water_Purity_Report_Overview_Controller {
         waterPurityTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showWaterPurityReportDetails(newValue));
         reportNumberColumn.setStyle("-fx-alignment: CENTER;");
-
-        Model.getInstance().loadWaterPurityReports();
     }
 
     /**
