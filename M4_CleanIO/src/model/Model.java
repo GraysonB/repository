@@ -72,4 +72,18 @@ public class Model {
         return loggedInProfile;
     }
 
+    /**
+     * loads the water source reports from database
+     */
+    public void loadWaterSourceReports() {
+        database.loadWaterSourceReports();
+    }
+
+    /**
+     * loads the water purity reports from database
+     */
+    public void loadWaterPurityReports() {
+        database.loadWaterPurityReports();
+    }
+
 }

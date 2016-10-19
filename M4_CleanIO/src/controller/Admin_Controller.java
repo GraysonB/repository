@@ -10,7 +10,7 @@ import model.Model;
 import model.Profile;
 
 /**
- * controller for profile overview
+ * controller for admin screen
  */
 public class Admin_Controller {
 
@@ -51,21 +51,21 @@ public class Admin_Controller {
                 cellData -> cellData.getValue().thisInstanceAccountNumberProperty().asObject());
 
         // Clear water source details.
-        showWaterSourceReportDetails(null);
+        showProfileDetails(null);
 
-        // Listen for selection changes and show the water source report details when changed.
+        // Listen for selection changes and show the profile details when changed.
         profileTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showWaterSourceReportDetails(newValue));
+                (observable, oldValue, newValue) -> showProfileDetails(newValue));
         accountNumberColumn.setStyle("-fx-alignment: CENTER;");
     }
 
     /**
-     * Fills all text fields to show details about the waterSourceReport.
-     * If the specified waterSourceReport is null, all text fields are cleared.
+     * Fills all text fields to show details about the profile.
+     * If the specified profile is null, all text fields are cleared.
      *
-     * @param profile the waterSourceReport or null
+     * @param profile the profile or null
      */
-    private void showWaterSourceReportDetails(Profile profile) {
+    private void showProfileDetails(Profile profile) {
         if (profile != null) {
             // Fill the labels with info from the profile object.
             usernameLabel.setText(profile.getUsername());
@@ -105,4 +105,5 @@ public class Admin_Controller {
     private void handleLogoutPressed() {
         mainApplication.displayWelcomeScene();
     }
+    
 }
